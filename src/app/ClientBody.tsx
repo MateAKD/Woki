@@ -13,5 +13,9 @@ export default function ClientBody({
     document.body.className = "antialiased dark font-montserrat";
   }, []);
 
-  return <div className="antialiased dark">{children}</div>;
+  return (
+    <div className="antialiased dark">
+      {children}
+    </div>
+  );
 }

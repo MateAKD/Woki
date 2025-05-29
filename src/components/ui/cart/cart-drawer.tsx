@@ -9,6 +9,7 @@ import Link from "next/link";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { CheckCircle } from "lucide-react";
 
 export default function CartDrawer() {
   const {
@@ -19,12 +20,13 @@ export default function CartDrawer() {
     removeItem,
     isCartOpen,
     setIsCartOpen,
-    clearCart
+    clearCart // Used in handleFinalizarCompra function
   } = useCart();
 
   const [deliveryType, setDeliveryType] = useState<'envio' | 'pickup'>('pickup');
   const [showErrorDialog, setShowErrorDialog] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
   
   // Nuevos estados para el formulario de envío
   const [customerName, setCustomerName] = useState('');
@@ -98,51 +100,77 @@ export default function CartDrawer() {
   
   // Función para finalizar la compra
   const handleFinalizarCompra = () => {
-    // Validar si es envío y cumple con el monto mínimo
-    if (deliveryType === 'envio' && totalPrice < MONTO_MINIMO_ENVIO) {
-      setErrorMessage(`El monto mínimo para envío a domicilio es de $${MONTO_MINIMO_ENVIO}`);
-      setShowErrorDialog(true);
-      return;
-    }
-    
-    // Validar campos obligatorios para envío
-    if (deliveryType === 'envio') {
-      if (!customerName.trim()) {
-        setErrorMessage('Por favor ingresa tu nombre');
+    try {
+      // Validar si es envío y cumple con el monto mínimo
+      if (deliveryType === 'envio' && totalPrice < MONTO_MINIMO_ENVIO) {
+        setErrorMessage(`El monto mínimo para envío a domicilio es de $${MONTO_MINIMO_ENVIO}`);
         setShowErrorDialog(true);
         return;
       }
       
-      if (!address.trim()) {
-        setErrorMessage('Por favor ingresa tu dirección');
+      // Validar campos obligatorios para envío
+      if (deliveryType === 'envio') {
+        if (!customerName.trim()) {
+          setErrorMessage('Por favor ingresa tu nombre');
+          setShowErrorDialog(true);
+          return;
+        }
+        
+        if (!address.trim()) {
+          setErrorMessage('Por favor ingresa tu dirección');
+          setShowErrorDialog(true);
+          return;
+        }
+        
+        if (!deliveryZone) {
+          setErrorMessage('Por favor selecciona una zona de entrega');
+          setShowErrorDialog(true);
+          return;
+        }
+      }
+      
+      // Validar método de pago
+      if (!paymentMethod) {
+        setErrorMessage('Por favor selecciona un método de pago');
         setShowErrorDialog(true);
         return;
       }
       
-      if (!deliveryZone) {
-        setErrorMessage('Por favor selecciona una zona de entrega');
+      // Validar que haya productos en el carrito
+      if (items.length === 0) {
+        setErrorMessage('No hay productos en el carrito');
         setShowErrorDialog(true);
         return;
       }
-    }
-    
-    // Validar método de pago
-    if (!paymentMethod) {
-      setErrorMessage('Por favor selecciona un método de pago');
+      
+      // Número de WhatsApp registrado en la aplicación
+      const whatsappNumber = "5491136029807"; // Número de WhatsApp de Woki
+      
+      // Generar el mensaje y abrir WhatsApp
+      const message = generateWhatsAppMessage();
+      const whatsappWindow = window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+      
+      // Si la ventana se abrió correctamente, mostrar mensaje de éxito y limpiar el carrito
+      if (whatsappWindow) {
+        // Mostrar el diálogo de éxito
+        setShowSuccessDialog(true);
+        
+        // Limpiar el carrito después de 1 segundo para asegurar que WhatsApp se abrió correctamente
+        setTimeout(() => {
+          clearCart();
+          // No cerramos el carrito inmediatamente para que el usuario vea el mensaje de éxito
+        }, 1000);
+      }
+    } catch (error) {
+      console.error('Error al finalizar la compra:', error);
+      setErrorMessage('Ocurrió un error al procesar tu compra. Por favor intenta nuevamente.');
       setShowErrorDialog(true);
-      return;
     }
-    
-    // Número de WhatsApp registrado en la aplicación
-    const whatsappNumber = "5491136029807"; // Número de WhatsApp de Woki
-    
-    // Generar el mensaje y abrir WhatsApp
-    const message = generateWhatsAppMessage();
-    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
   };
 
   return (
     <>
+      {/* Error Dialog */}
       <Dialog open={showErrorDialog} onOpenChange={setShowErrorDialog}>
         <DialogContent className="bg-black border border-gray-800 text-white">
           <DialogHeader>
@@ -157,6 +185,29 @@ export default function CartDrawer() {
           <div className="flex justify-end">
             <Button onClick={() => setShowErrorDialog(false)}>
               Entendido
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+      
+      {/* Success Dialog */}
+      <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+        <DialogContent className="bg-black border border-gray-800 text-white">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <CheckCircle className="h-5 w-5 text-green-500" />
+              ¡Compra realizada!
+            </DialogTitle>
+            <DialogDescription className="text-gray-300">
+              Tu pedido ha sido enviado a WhatsApp. Gracias por tu compra.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-end">
+            <Button onClick={() => {
+              setShowSuccessDialog(false);
+              setIsCartOpen(false);
+            }}>
+              Cerrar
             </Button>
           </div>
         </DialogContent>

@@ -1,19 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import PageLayout from "@/components/layout/page-layout";
-// import HeroCarousel from "@/components/home/hero-carousel"; // Removed HeroCarousel
 import CategorySection from "@/components/home/category-section";
-import ProductGrid from "@/components/product/product-grid";
-import { Button } from "@/components/ui/button";
-// import { heroSlides } from "@/lib/data/hero-slides"; // Removed heroSlides import
 import { categories } from "@/lib/data/categories";
-import { getFeaturedProducts } from "@/lib/data/products";
-import { AlertTriangle } from 'lucide-react'; // Import AlertTriangle
+import { AlertTriangle } from 'lucide-react';
 
 export default function Home() {
   // Only use the first 5 categories for the homepage
   const homeCategories = categories.slice(0, 5);
-  const featuredProducts = getFeaturedProducts();
 
   return (
     <PageLayout>
@@ -21,8 +15,13 @@ export default function Home() {
       <div className="bg-yellow-400 py-2 px-0 text-black text-center overflow-hidden">
         <div className="marquee-infinite-row items-center">
           {Array.from({ length: 24 }).map((_, i) => (
-            <span key={i} className="flex items-center mx-2">
-              <span className="inline-block font-bold text-base tracking-tight mr-2">WOKI EXPERIENCE</span>
+            <span 
+              key={`woki-experience-${i}`} 
+              className="flex items-center mx-2"
+            >
+              <span className="inline-block font-bold text-base tracking-tight mr-2">
+                WOKI EXPERIENCE
+              </span>
               <AlertTriangle className="h-5 w-5 inline-block ml-3" />
             </span>
           ))}

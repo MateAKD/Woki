@@ -1,7 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
-  distDir: '.next',
   images: {
     unoptimized: false,
     domains: [
@@ -43,15 +41,19 @@ const nextConfig = {
     ignoreDuringBuilds: true,
     dirs: [],
   },
-  // Deshabilitar la comprobación de tipos durante el build
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Removing experimental features for Netlify compatibility
-  // experimental: {
-  //   optimizeCss: true,
-  //   scrollRestoration: true,
-  // },
+  experimental: {
+    esmExternals: 'loose',
+  },
+  webpack: (config) => {
+    // Silencia los warnings de ESLint
+    config.infrastructureLogging = {
+      level: 'error',
+    };
+    return config;
+  },
 };
 
-module.exports = nextConfig;
+export default nextConfig;
