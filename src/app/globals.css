@@ -1,0 +1,126 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light mode - using mostly white backgrounds */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 7%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 7%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 7%;
+
+    /* Mint green from the website - primary color (#6c9f90) */
+    --primary: 162 19% 52%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Light yellow accent (#e5c315) */
+    --secondary: 49 82% 49%;
+    --secondary-foreground: 0 0% 7%;
+
+    --muted: 160 13% 95%;
+    --muted-foreground: 0 0% 45%;
+
+    /* Tan/beige accent (#eae0cf) */
+    --accent: 39 40% 86%;
+    --accent-foreground: 0 0% 7%;
+
+    /* Orange/red accent (#d6522f) */
+    --destructive: 14 68% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 162 19% 52%;
+    --radius: 0.5rem;
+
+    /* Chart colors */
+    --chart-1: 162 19% 52%; /* mint green */
+    --chart-2: 49 82% 49%; /* yellow */
+    --chart-3: 14 68% 51%; /* orange */
+    --chart-4: 39 40% 86%; /* tan */
+    --chart-5: 210 7% 41%; /* gray */
+  }
+
+  .dark {
+    /* Dark mode - using black backgrounds from the website */
+    --background: 0 0% 3%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 7%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 7%;
+    --popover-foreground: 0 0% 95%;
+
+    /* Mint green from the website (#6c9f90) */
+    --primary: 162 19% 52%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Light yellow accent (#e5c315) */
+    --secondary: 49 82% 49%;
+    --secondary-foreground: 0 0% 7%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 65%;
+
+    /* Tan/beige accent (darker) */
+    --accent: 39 40% 30%;
+    --accent-foreground: 0 0% 95%;
+
+    /* Orange/red accent (#d6522f) */
+    --destructive: 14 68% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 162 19% 52%;
+
+    /* Chart colors */
+    --chart-1: 162 19% 52%; /* mint green */
+    --chart-2: 49 82% 49%; /* yellow */
+    --chart-3: 14 68% 51%; /* orange */
+    --chart-4: 39 40% 86%; /* tan */
+    --chart-5: 210 7% 41%; /* gray */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-montserrat;
+  }
+}
+
+@layer utilities {
+  .animate-marquee {
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-infinite-row {
+    display: flex;
+    width: max-content;
+    animation: marquee-infinite-row 20s linear infinite;
+  }
+
+  @keyframes marquee {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  @keyframes marquee-infinite-row {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+}
