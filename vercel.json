@@ -1,20 +1,11 @@
 {
   "version": 2,
-  "buildCommand": "node vercel-build.mjs",
-  "installCommand": "npm install",
-  "framework": "nextjs",
-  "outputDirectory": ".next",
+  "buildCommand": "next build",
   "env": {
     "NODE_ENV": "production",
     "DISABLE_ESLINT_PLUGIN": "true",
     "NEXT_DISABLE_ESLINT": "1"
   },
-  "builds": [
-    {
-      "src": "next.config.js",
-      "use": "@vercel/next"
-    }
-  ],
   "routes": [
     {
       "src": "/(.*)",
