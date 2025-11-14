@@ -34,7 +34,7 @@ export default function ProductCard({ id, title, price, imageUrl, slug }: Produc
   const priceWithoutSymbol = formattedPrice.replace('$', '');
 
   return (
-    <div className="group relative overflow-hidden bg-black text-white">
+    <div className="group relative overflow-hidden bg-[#1a513c] text-white">
       {/* Product image - full height/width container with mint green background */}
       <div className="relative h-64 w-full bg-primary/20 overflow-hidden">
         <Link href={`/productos/${slug}`}>
@@ -53,7 +53,7 @@ export default function ProductCard({ id, title, price, imageUrl, slug }: Produc
           <Button
             variant="ghost"
             size="icon"
-            className="bg-black/70 text-white hover:bg-black hover:text-primary rounded-full"
+            className="bg-[#1a513c]/70 text-white hover:bg-[#1a513c] hover:text-primary rounded-full"
             onClick={(e) => {
               e.preventDefault();
               handleAddToCart();

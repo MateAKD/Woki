@@ -11,10 +11,10 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Woki Web",
-  description: "Comprá productos de Woki por internet. Tenemos woks especiales y más. Hacé tu pedido y pagalo online.",
+  title: "Zurdo Web",
+  description: "Comprá productos de Zurdo por internet. Tenemos woks especiales y más. Hacé tu pedido y pagalo online.",
   icons: {
-    icon: "/woki-logo.png",
+    icon: "/ZURDO LOGO.jpg",
   },
 };
 

@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "cross-env NODE_OPTIONS=\"--max_old_space_size=4096\" DISABLE_ESLINT_PLUGIN=true NEXT_DISABLE_ESLINT=1 ESLINT_NO_DEV_ERRORS=true next build --no-lint",
+    "build": "next build",
     "start": "next start",
     "lint": "echo 'Linting disabled'",
     "format": "echo 'Formatting disabled'"

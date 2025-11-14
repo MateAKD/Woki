@@ -6,7 +6,7 @@ import Image from "next/image";
 export default function WhatsappButton() {
   return (
     <Link
-      href="https://wa.me/5491136029807?text=Necesito%20woki%20en%20mi%20freezer%20YA"
+      href="https://wa.me/5491134100409?text=Necesito%20zurdo%20en%20mi%20freezer%20YA!"
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 right-6 z-50 bg-transparent p-0 shadow-lg hover:opacity-80 transition-opacity"
@@ -16,6 +16,7 @@ export default function WhatsappButton() {
         alt="WhatsApp"
         width={56}
         height={56}
+        style={{ filter: 'brightness(0) invert(1)' }}
       />
     </Link>
   );

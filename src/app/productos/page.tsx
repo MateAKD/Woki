@@ -28,7 +28,7 @@ export default function ProductsPage() {
   return (
     <PageLayout>
       {/* Breadcrumbs */}
-      <div className="bg-black pt-6 pb-2">
+      <div className="bg-[#1a513c] pt-6 pb-2">
         <div className="container mx-auto">
           <div className="text-sm text-gray-400">
             <Link href="/" className="hover:text-primary">
@@ -40,20 +40,20 @@ export default function ProductsPage() {
       </div>
 
       {/* Page Title */}
-      <div className="bg-black py-4">
+      <div className="bg-[#1a513c] py-4">
         <div className="container mx-auto">
           <h1 className="text-3xl font-bold uppercase">Productos</h1>
         </div>
       </div>
 
       {/* Filter Bar */}
-      <div className="bg-black py-6 border-y border-gray-800">
+      <div className="bg-[#1a513c] py-6 border-y border-gray-800">
         <div className="container mx-auto">
           <div className="flex flex-wrap md:flex-nowrap flex-col md:flex-row gap-4">
             {/* Filter Dropdown */}
             <div className="w-full md:w-auto">
               <select
-                className="w-full text-white bg-black border border-gray-700 rounded px-4 py-2"
+                className="w-full text-white bg-[#1a513c] border border-gray-700 rounded px-4 py-2"
                 value={selectedCategory || ""}
                 onChange={e => setSelectedCategory(e.target.value || null)}
               >
@@ -66,7 +66,7 @@ export default function ProductsPage() {
             {/* Sort Dropdown */}
             <div className="w-full md:w-auto md:ml-4">
               <select
-                className="w-full text-white bg-black border border-gray-700 rounded px-4 py-2"
+                className="w-full text-white bg-[#1a513c] border border-gray-700 rounded px-4 py-2"
                 value={sort}
                 onChange={e => setSort(e.target.value)}
               >
@@ -82,7 +82,7 @@ export default function ProductsPage() {
       </div>
 
       {/* Product Grid */}
-      <section className="py-8 bg-black">
+      <section className="py-8 bg-[#1a513c]">
         <div className="container mx-auto">
           <ProductGrid products={sortedProducts} />
         </div>

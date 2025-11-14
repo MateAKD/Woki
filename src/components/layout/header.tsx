@@ -40,11 +40,11 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="bg-black text-white sticky top-0 z-50">
+    <header className="bg-[#1a513c] text-white sticky top-0 z-50">
       {/* Top promotion banner - MOVED TO PAGE.TSX */}
       {/* <div className="bg-yellow-400 py-2 px-4 text-black text-center overflow-hidden whitespace-nowrap">
         <div className="animate-marquee-infinite">
-          <span className="inline-block font-bold text-lg">Woki Experience ! Woki Experience ! Woki Experience ! Woki Experience ! Woki Experience ! Woki Experience !</span>
+          <span className="inline-block font-bold text-lg">Zurdo Experience ! Zurdo Experience ! Zurdo Experience ! Zurdo Experience ! Zurdo Experience ! Zurdo Experience !</span>
         </div>
       </div> */}
 
@@ -64,8 +64,8 @@ export default function Header() {
         <div className="absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none md:left-0">
           <Link href="/">
             <Image
-              src="/woki-logo.png"
-              alt="WOKI"
+              src="/ZURDO LOGO.jpg"
+              alt="ZURDO"
               width={100}
               height={100}
               className="h-16 w-auto"
@@ -78,12 +78,12 @@ export default function Header() {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <NavigationMenuLink href="/" className="text-white hover:text-yellow-400">
+                <NavigationMenuLink href="/" className="text-white hover:text-[#f9f6f1]">
                   Inicio
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-white hover:text-yellow-400 bg-black">
+                <NavigationMenuTrigger className="text-white hover:text-[#f9f6f1] bg-[#1a513c]">
                   Productos
                 </NavigationMenuTrigger>
                 <NavigationMenuContent>
@@ -106,7 +106,7 @@ export default function Header() {
                 </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuLink href="/#contactanos" className="text-white hover:text-yellow-400">
+                <NavigationMenuLink href="/#contactanos" className="text-white hover:text-[#f9f6f1]">
                   Contacto
                 </NavigationMenuLink>
               </NavigationMenuItem>
@@ -126,11 +126,11 @@ export default function Header() {
               className="w-[200px] bg-white/10 border-white/20 text-white placeholder:text-white/50"
             />
             {showSuggestions && filteredProducts.length > 0 && (
-              <div className="absolute top-12 left-0 w-full bg-black border border-gray-700 rounded shadow-lg z-50 max-h-60 overflow-auto">
+              <div className="absolute top-12 left-0 w-full bg-[#1a513c] border border-gray-700 rounded shadow-lg z-50 max-h-60 overflow-auto">
                 {filteredProducts.map(product => (
                   <button
                     key={product.id}
-                    className="w-full text-left px-4 py-2 hover:bg-yellow-400 hover:text-black transition-colors"
+                    className="w-full text-left px-4 py-2 hover:bg-[#1a513c] hover:text-[#f9f6f1] transition-colors"
                     onMouseDown={() => handleSelectProduct(product.slug)}
                   >
                     {product.title}
@@ -150,7 +150,7 @@ export default function Header() {
             >
               <ShoppingBasket className="h-6 w-6" />
               {totalItems > 0 && (
-                <div className="absolute -top-1 -right-1 bg-yellow-400 text-black text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                <div className="absolute -top-1 -right-1 bg-[#1a513c] text-[#f9f6f1] text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                   {totalItems}
                 </div>
               )}
@@ -162,15 +162,15 @@ export default function Header() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden bg-black fixed inset-0 z-50 transition-transform transform ${
+        className={`md:hidden bg-[#1a513c] fixed inset-0 z-50 transition-transform transform ${
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <div className="flex justify-between items-center p-4 border-b border-gray-800">
           <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
             <Image
-              src="/woki-logo.png"
-              alt="WOKI"
+              src="/ZURDO LOGO.jpg"
+              alt="ZURDO"
               width={100}
               height={100}
               className="h-16 w-auto"
@@ -192,14 +192,14 @@ export default function Header() {
               placeholder="Buscar productos..."
               value={search}
               onChange={handleSearchChange}
-              className="w-full bg-black border-gray-700 text-white placeholder:text-gray-400"
+              className="w-full bg-[#1a513c] border-gray-700 text-white placeholder:text-gray-400"
             />
             {showSuggestions && filteredProducts.length > 0 && (
-              <div className="absolute top-12 left-0 w-full bg-black border border-gray-700 rounded shadow-lg z-50 max-h-60 overflow-auto">
+              <div className="absolute top-12 left-0 w-full bg-[#1a513c] border border-gray-700 rounded shadow-lg z-50 max-h-60 overflow-auto">
                 {filteredProducts.map(product => (
                   <button
                     key={product.id}
-                    className="w-full text-left px-4 py-2 hover:bg-yellow-400 hover:text-black transition-colors"
+                    className="w-full text-left px-4 py-2 hover:bg-[#1a513c] hover:text-[#f9f6f1] transition-colors"
                     onMouseDown={() => handleSelectProduct(product.slug)}
                   >
                     {product.title}
@@ -211,7 +211,7 @@ export default function Header() {
           <nav className="flex flex-col space-y-4 p-4">
             <Link
               href="/"
-              className="text-white hover:text-yellow-400"
+              className="text-white hover:text-[#f9f6f1]"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Inicio
@@ -219,7 +219,7 @@ export default function Header() {
             {/* Mobile Products Menu */}
             <div className="text-white">
               <button
-                className="flex items-center justify-between w-full hover:text-yellow-400"
+                className="flex items-center justify-between w-full hover:text-[#f9f6f1]"
                 onClick={(e) => {
                   const nextEl = e.currentTarget.nextElementSibling;
                   if (nextEl && nextEl.tagName === 'UL') {
@@ -232,7 +232,7 @@ export default function Header() {
               <ul className="ml-4 mt-2 space-y-2 hidden">
                 <li>
                   <button
-                    className="flex items-center justify-between w-full hover:text-yellow-400"
+                    className="flex items-center justify-between w-full hover:text-[#f9f6f1]"
                     onClick={(e) => {
                       const nextEl = e.currentTarget.nextElementSibling;
                       if (nextEl && nextEl.tagName === 'UL') {
@@ -243,10 +243,10 @@ export default function Header() {
                     Carne <ChevronDown className="h-4 w-4" />
                   </button>
                   <ul className="ml-4 mt-2 space-y-2 hidden">
-                    <li><Link href="/productos/carne/wok-lomo" className="text-white hover:text-yellow-400" onClick={() => setIsMobileMenuOpen(false)}>Lomo</Link></li>
+                    <li><Link href="/productos/carne/wok-lomo" className="text-white hover:text-[#f9f6f1]" onClick={() => setIsMobileMenuOpen(false)}>Lomo</Link></li>
                     <li>
                       <button
-                        className="flex items-center justify-between w-full hover:text-yellow-400"
+                        className="flex items-center justify-between w-full hover:text-[#f9f6f1]"
                         onClick={(e) => {
                           const nextEl = e.currentTarget.nextElementSibling;
                           if (nextEl && nextEl.tagName === 'UL') {
@@ -257,19 +257,19 @@ export default function Header() {
                         Pollo <ChevronDown className="h-4 w-4" />
                       </button>
                       <ul className="ml-4 mt-2 space-y-2 hidden">
-                        <li><Link href="/productos/carne/pollo" className="text-white hover:text-yellow-400" onClick={() => setIsMobileMenuOpen(false)}>Pollo</Link></li>
-                        <li><Link href="/productos/carne/pollo-spicy" className="text-white hover:text-yellow-400" onClick={() => setIsMobileMenuOpen(false)}>Spicy</Link></li>
+                        <li><Link href="/productos/carne/pollo" className="text-white hover:text-[#f9f6f1]" onClick={() => setIsMobileMenuOpen(false)}>Pollo</Link></li>
+                        <li><Link href="/productos/carne/pollo-spicy" className="text-white hover:text-[#f9f6f1]" onClick={() => setIsMobileMenuOpen(false)}>Spicy</Link></li>
                       </ul>
                     </li>
-                    <li><Link href="/productos/carne/langostinos" className="text-white hover:text-yellow-400" onClick={() => setIsMobileMenuOpen(false)}>Langostinos</Link></li>
+                    <li><Link href="/productos/carne/langostinos" className="text-white hover:text-[#f9f6f1]" onClick={() => setIsMobileMenuOpen(false)}>Langostinos</Link></li>
                   </ul>
                 </li>
-                <li><Link href="/productos/veggie/wok-veggie" className="text-white hover:text-yellow-400" onClick={() => setIsMobileMenuOpen(false)}>Veggie</Link></li>
+                <li><Link href="/productos/veggie/wok-veggie" className="text-white hover:text-[#f9f6f1]" onClick={() => setIsMobileMenuOpen(false)}>Veggie</Link></li>
               </ul>
             </div>
             <Link
               href="/#contactanos"
-              className="text-white hover:text-yellow-400"
+              className="text-white hover:text-[#f9f6f1]"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Contacto

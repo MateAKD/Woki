@@ -35,7 +35,7 @@ export default function CartDrawer() {
   const [deliveryZone, setDeliveryZone] = useState<'zona_norte_martes' | 'zona_norte_jueves' | 'capital_otros' | ''>('');
   const [paymentMethod, setPaymentMethod] = useState<'mercado_pago' | 'transferencia' | 'efectivo' | ''>('');
   
-  const MONTO_MINIMO_ENVIO = 15000;
+  const CANTIDAD_MINIMA_ENVIO = 5;
   const envioCosto = 1000;
   const totalConEnvio = deliveryType === 'envio' ? totalPrice + envioCosto : totalPrice;
   
@@ -101,9 +101,9 @@ export default function CartDrawer() {
   // Función para finalizar la compra
   const handleFinalizarCompra = () => {
     try {
-      // Validar si es envío y cumple con el monto mínimo
-      if (deliveryType === 'envio' && totalPrice < MONTO_MINIMO_ENVIO) {
-        setErrorMessage(`El monto mínimo para envío a domicilio es de $${MONTO_MINIMO_ENVIO}`);
+      // Validar si es envío y cumple con la cantidad mínima
+      if (deliveryType === 'envio' && totalItems < CANTIDAD_MINIMA_ENVIO) {
+        setErrorMessage(`La cantidad mínima para envío a domicilio es de ${CANTIDAD_MINIMA_ENVIO} productos`);
         setShowErrorDialog(true);
         return;
       }
@@ -144,7 +144,7 @@ export default function CartDrawer() {
       }
       
       // Número de WhatsApp registrado en la aplicación
-      const whatsappNumber = "5491136029807"; // Número de WhatsApp de Woki
+      const whatsappNumber = "5491134100409"; // Número de WhatsApp de Zurdo
       
       // Generar el mensaje y abrir WhatsApp
       const message = generateWhatsAppMessage();
@@ -172,10 +172,10 @@ export default function CartDrawer() {
     <>
       {/* Error Dialog */}
       <Dialog open={showErrorDialog} onOpenChange={setShowErrorDialog}>
-        <DialogContent className="bg-black border border-gray-800 text-white">
+        <DialogContent className="bg-[#1a513c] border border-gray-800 text-white">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <AlertCircle className="h-5 w-5 text-yellow-500" />
+              <AlertCircle className="h-5 w-5 text-[#1a513c]" />
               Atención
             </DialogTitle>
             <DialogDescription className="text-gray-300">
@@ -183,7 +183,10 @@ export default function CartDrawer() {
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-end">
-            <Button onClick={() => setShowErrorDialog(false)}>
+            <Button 
+              className="bg-white text-black hover:bg-gray-100" 
+              onClick={() => setShowErrorDialog(false)}
+            >
               Entendido
             </Button>
           </div>
@@ -192,10 +195,10 @@ export default function CartDrawer() {
       
       {/* Success Dialog */}
       <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
-        <DialogContent className="bg-black border border-gray-800 text-white">
+        <DialogContent className="bg-[#1a513c] border border-gray-800 text-white">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <CheckCircle className="h-5 w-5 text-green-500" />
+              <CheckCircle className="h-5 w-5 text-[#1a513c]" />
               ¡Compra realizada!
             </DialogTitle>
             <DialogDescription className="text-gray-300">
@@ -203,10 +206,13 @@ export default function CartDrawer() {
             </DialogDescription>
           </DialogHeader>
           <div className="flex justify-end">
-            <Button onClick={() => {
-              setShowSuccessDialog(false);
-              setIsCartOpen(false);
-            }}>
+            <Button
+              className="bg-white text-black hover:bg-gray-100"
+              onClick={() => {
+                setShowSuccessDialog(false);
+                setIsCartOpen(false);
+              }}
+            >
               Cerrar
             </Button>
           </div>
@@ -214,16 +220,16 @@ export default function CartDrawer() {
       </Dialog>
 
       <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
-        <SheetContent side="right" className="w-full sm:w-96 bg-black border-gray-800 p-0 overflow-auto">
+        <SheetContent side="right" className="w-full sm:w-96 bg-[#1a513c] border-gray-800 p-0 overflow-auto">
         <SheetHeader>
           <SheetTitle className="sr-only">Carrito de compras</SheetTitle>
         </SheetHeader>
         <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between p-4 border-b border-gray-800">
+          <div className="flex items-center justify-between p-4 border-b border-gray-800 flex-shrink-0">
             <span className="text-xl font-medium">Carrito de compras</span>
           </div>
 
-          <div className="flex-1 overflow-auto">
+          <div className="flex-1 overflow-y-auto min-h-0">
             {items.length === 0 ? (
               <div className="p-8 text-center">
                 <ShoppingBasket className="h-12 w-12 mx-auto mb-4 text-gray-500" />
@@ -235,70 +241,70 @@ export default function CartDrawer() {
                 </Button>
               </div>
             ) : (
-              <div className="py-4 px-4 space-y-4">
-                {items.map((item) => (
-                  <div key={item.product.id} className="flex gap-3">
-                    {/* Product image */}
-                    <div className="relative flex-shrink-0 w-20 h-20 bg-primary/20 rounded overflow-hidden">
-                      <Image
-                        src={item.product.imageUrl}
-                        alt={item.product.title}
-                        fill
-                        className="object-cover"
-                      />
-                    </div>
+              <>
+                {/* Productos - siempre visibles arriba */}
+                <div className="py-4 px-4 space-y-4">
+                  {items.map((item) => (
+                    <div key={item.product.id} className="flex gap-3">
+                      {/* Product image */}
+                      <div className="relative flex-shrink-0 w-20 h-20 bg-primary/20 rounded overflow-hidden">
+                        <Image
+                          src={item.product.imageUrl}
+                          alt={item.product.title}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
 
-                    {/* Product details */}
-                    <div className="flex-1 min-w-0">
-                      <Link
-                        href={`/productos/${item.product.slug}`}
-                        className="text-sm font-medium line-clamp-2 hover:text-primary"
-                        onClick={() => setIsCartOpen(false)}
-                      >
-                        {item.product.title}
-                      </Link>
+                      {/* Product details */}
+                      <div className="flex-1 min-w-0">
+                        <Link
+                          href={`/productos/${item.product.slug}`}
+                          className="text-sm font-medium line-clamp-2 hover:text-primary"
+                          onClick={() => setIsCartOpen(false)}
+                        >
+                          {item.product.title}
+                        </Link>
 
-                      <div className="mt-1 flex items-center justify-between">
-                        <div className="flex items-center border border-gray-700 rounded-md">
+                        <div className="mt-1 flex items-center justify-between">
+                          <div className="flex items-center border border-gray-700 rounded-md">
+                            <button
+                              className="px-2 py-0.5 hover:bg-gray-800 rounded-l-md"
+                              onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                            >
+                              <Minus className="h-3 w-3" />
+                            </button>
+                            <span className="px-2 py-0.5 text-sm">{item.quantity}</span>
+                            <button
+                              className="px-2 py-0.5 hover:bg-gray-800 rounded-r-md"
+                              onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
+                            >
+                              <Plus className="h-3 w-3" />
+                            </button>
+                          </div>
+
                           <button
-                            className="px-2 py-0.5 hover:bg-gray-800 rounded-l-md"
-                            onClick={() => updateQuantity(item.product.id, item.quantity - 1)}
+                            className="text-gray-400 hover:text-destructive"
+                            onClick={() => removeItem(item.product.id)}
                           >
-                            <Minus className="h-3 w-3" />
-                          </button>
-                          <span className="px-2 py-0.5 text-sm">{item.quantity}</span>
-                          <button
-                            className="px-2 py-0.5 hover:bg-gray-800 rounded-r-md"
-                            onClick={() => updateQuantity(item.product.id, item.quantity + 1)}
-                          >
-                            <Plus className="h-3 w-3" />
+                            <Trash2 className="h-4 w-4" />
                           </button>
                         </div>
 
-                        <button
-                          className="text-gray-400 hover:text-destructive"
-                          onClick={() => removeItem(item.product.id)}
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </button>
-                      </div>
-
-                      <div className="mt-1 text-sm font-medium">
-                        {new Intl.NumberFormat('es-AR', {
-                          style: 'currency',
-                          currency: 'ARS',
-                          minimumFractionDigits: 2
-                        }).format(item.product.price * item.quantity)}
+                        <div className="mt-1 text-sm font-medium">
+                          {new Intl.NumberFormat('es-AR', {
+                            style: 'currency',
+                            currency: 'ARS',
+                            minimumFractionDigits: 2
+                          }).format(item.product.price * item.quantity)}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+                  ))}
+                </div>
 
-          {items.length > 0 && (
-            <div className="border-t border-gray-800 p-4">
+                {/* Sección de checkout - debajo de los productos */}
+                <div className="border-t border-gray-800 p-4">
               <div className="space-y-4">
                 <div className="flex justify-between font-medium">
                   <span>Subtotal ({totalItems} {totalItems === 1 ? 'producto' : 'productos'}):</span>
@@ -313,7 +319,11 @@ export default function CartDrawer() {
                   <div className="grid grid-cols-2 gap-2">
                     <button
                       type="button"
-                      className={`p-3 border rounded-md flex items-center justify-center ${deliveryType === 'pickup' ? 'border-primary bg-primary/10' : 'border-gray-700'}`}
+                      className={`p-3 border-2 rounded-md flex items-center justify-center transition-all
+                        ${deliveryType === 'pickup'
+                          ? 'border-white bg-white text-black shadow-lg scale-95'
+                          : 'border-gray-700 text-white bg-transparent hover:border-gray-600'
+                        }`}
                       onClick={() => setDeliveryType('pickup')}
                     >
                       <div className="text-center">
@@ -323,7 +333,11 @@ export default function CartDrawer() {
                     </button>
                     <button
                       type="button"
-                      className={`p-3 border rounded-md flex items-center justify-center ${deliveryType === 'envio' ? 'border-primary bg-primary/10' : 'border-gray-700'}`}
+                      className={`p-3 border-2 rounded-md flex items-center justify-center transition-all
+                        ${deliveryType === 'envio'
+                          ? 'border-white bg-white text-black shadow-lg scale-95'
+                          : 'border-gray-700 text-white bg-transparent hover:border-gray-600'
+                        }`}
                       onClick={() => setDeliveryType('envio')}
                     >
                       <div className="text-center">
@@ -343,7 +357,7 @@ export default function CartDrawer() {
                       <label className="text-sm text-gray-400 block mb-1">Nombre completo *</label>
                       <input 
                         type="text" 
-                        className="w-full bg-gray-900 border border-gray-800 rounded-md p-2 text-sm"
+                        className="w-full bg-white text-gray-700 border border-gray-800 rounded-md p-2 text-sm"
                         value={customerName}
                         onChange={(e) => setCustomerName(e.target.value)}
                         placeholder="Tu nombre completo"
@@ -354,7 +368,7 @@ export default function CartDrawer() {
                       <label className="text-sm text-gray-400 block mb-1">Dirección *</label>
                       <input 
                         type="text" 
-                        className="w-full bg-gray-900 border border-gray-800 rounded-md p-2 text-sm"
+                        className="w-full bg-white text-gray-700 border border-gray-800 rounded-md p-2 text-sm"
                         value={address}
                         onChange={(e) => setAddress(e.target.value)}
                         placeholder="Calle y número"
@@ -365,7 +379,7 @@ export default function CartDrawer() {
                       <label className="text-sm text-gray-400 block mb-1">Piso/Depto (opcional)</label>
                       <input 
                         type="text" 
-                        className="w-full bg-gray-900 border border-gray-800 rounded-md p-2 text-sm"
+                        className="w-full bg-white text-gray-700 border border-gray-800 rounded-md p-2 text-sm"
                         value={floorApt}
                         onChange={(e) => setFloorApt(e.target.value)}
                         placeholder="Piso y departamento"
@@ -377,21 +391,21 @@ export default function CartDrawer() {
                       <div className="grid grid-cols-1 gap-2">
                         <button
                           type="button"
-                          className={`p-2 border rounded-md flex items-center justify-center text-sm ${deliveryZone === 'zona_norte_martes' ? 'border-primary bg-primary/10' : 'border-gray-800'}`}
+                          className={`p-2 border-2 rounded-md flex items-center justify-center text-sm transition-all ${deliveryZone === 'zona_norte_martes' ? 'border-[#f9f6f1] bg-[#f9f6f1] text-black shadow-lg scale-95' : 'border-gray-800 text-white hover:border-gray-700'}`}
                           onClick={() => setDeliveryZone('zona_norte_martes')}
                         >
                           Zona Norte (martes)
                         </button>
                         <button
                           type="button"
-                          className={`p-2 border rounded-md flex items-center justify-center text-sm ${deliveryZone === 'zona_norte_jueves' ? 'border-primary bg-primary/10' : 'border-gray-800'}`}
+                          className={`p-2 border-2 rounded-md flex items-center justify-center text-sm transition-all ${deliveryZone === 'zona_norte_jueves' ? 'border-[#f9f6f1] bg-[#f9f6f1] text-black shadow-lg scale-95' : 'border-gray-800 text-white hover:border-gray-700'}`}
                           onClick={() => setDeliveryZone('zona_norte_jueves')}
                         >
                           Zona Norte (jueves)
                         </button>
                         <button
                           type="button"
-                          className={`p-2 border rounded-md flex items-center justify-center text-sm ${deliveryZone === 'capital_otros' ? 'border-primary bg-primary/10' : 'border-gray-800'}`}
+                          className={`p-2 border-2 rounded-md flex items-center justify-center text-sm transition-all ${deliveryZone === 'capital_otros' ? 'border-[#f9f6f1] bg-[#f9f6f1] text-black shadow-lg scale-95' : 'border-gray-800 text-white hover:border-gray-700'}`}
                           onClick={() => setDeliveryZone('capital_otros')}
                         >
                           Capital y otros (domingo)
@@ -407,21 +421,27 @@ export default function CartDrawer() {
                   <div className="grid grid-cols-1 gap-2">
                     <button
                       type="button"
-                      className={`p-2 border rounded-md flex items-center justify-center text-sm ${paymentMethod === 'mercado_pago' ? 'border-primary bg-primary/10' : 'border-gray-800'}`}
+                      className={`p-2 border-2 rounded-md flex items-center justify-center text-sm transition-all ${
+                        paymentMethod === 'mercado_pago' ? 'border-[#1a513c] bg-white text-black shadow-lg scale-95' : 'border-gray-800 text-white hover:border-gray-700'
+                      }`}
                       onClick={() => setPaymentMethod('mercado_pago')}
                     >
                       Mercado Pago
                     </button>
                     <button
                       type="button"
-                      className={`p-2 border rounded-md flex items-center justify-center text-sm ${paymentMethod === 'transferencia' ? 'border-primary bg-primary/10' : 'border-gray-800'}`}
+                      className={`p-2 border-2 rounded-md flex items-center justify-center text-sm transition-all ${
+                        paymentMethod === 'transferencia' ? 'border-[#1a513c] bg-white text-black shadow-lg scale-95' : 'border-gray-800 text-white hover:border-gray-700'
+                      }`}
                       onClick={() => setPaymentMethod('transferencia')}
                     >
                       Transferencia bancaria
                     </button>
                     <button
                       type="button"
-                      className={`p-2 border rounded-md flex items-center justify-center text-sm ${paymentMethod === 'efectivo' ? 'border-primary bg-primary/10' : 'border-gray-800'}`}
+                      className={`p-2 border-2 rounded-md flex items-center justify-center text-sm transition-all ${
+                        paymentMethod === 'efectivo' ? 'border-[#1a513c] bg-white text-black shadow-lg scale-95' : 'border-gray-800 text-white hover:border-gray-700'
+                      }`}
                       onClick={() => setPaymentMethod('efectivo')}
                     >
                       Efectivo
@@ -435,30 +455,31 @@ export default function CartDrawer() {
                 </div>
 
                 <Button 
-                  className="w-full bg-primary hover:bg-primary/90 mt-4"
+                  className="w-full bg-[#00e676] hover:bg-[#00c853] text-black font-bold mt-4 transition-colors"
                   onClick={handleFinalizarCompra}
                 >
                   Finalizar Compra
                 </Button>
 
                 <Button
-                  variant="outline"
-                  className="w-full mt-2"
+                  className="w-full mt-2 bg-black text-white font-bold border-black"
                   onClick={() => setIsCartOpen(false)}
                 >
                   Continuar comprando
                 </Button>
 
                 {/* Mensaje de mínimo de compra */}
-                {deliveryType === 'envio' && totalPrice < MONTO_MINIMO_ENVIO && (
-                  <div className="mt-4 text-center text-yellow-500 font-semibold flex items-center justify-center gap-2">
+                {deliveryType === 'envio' && totalItems < CANTIDAD_MINIMA_ENVIO && (
+                  <div className="mt-4 text-center text-[#1a513c] font-semibold flex items-center justify-center gap-2">
                     <AlertCircle className="h-4 w-4" />
-                    El monto mínimo de compra para envíos es de ${MONTO_MINIMO_ENVIO}
+                    La cantidad mínima de compra para envíos es de {CANTIDAD_MINIMA_ENVIO} productos
                   </div>
                 )}
               </div>
-            </div>
-          )}
+                </div>
+              </>
+            )}
+          </div>
         </div>
       </SheetContent>
     </Sheet>

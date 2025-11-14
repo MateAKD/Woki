@@ -9,6 +9,12 @@ export interface Category {
 
 export const categories: Category[] = [
   {
+    id: "6",
+    title: "",
+    imageUrl: "/Truchon 1.jpg",
+    slug: "carne/truchon-salsa-agridulce"
+  },
+  {
     id: "1",
     title: "WOK DE LOMO",
     imageUrl: "/wok-lomo.jpg",

@@ -12,13 +12,13 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 7%;
 
-    /* Mint green from the website - primary color (#6c9f90) */
-    --primary: 162 19% 52%;
-    --primary-foreground: 0 0% 100%;
+    /* Verde principal - primary color (#1a513c) */
+    --primary: 150 50% 21%;
+    --primary-foreground: 40 33% 96%;
 
-    /* Light yellow accent (#e5c315) */
-    --secondary: 49 82% 49%;
-    --secondary-foreground: 0 0% 7%;
+    /* Blanco secundario (#f9f6f1) */
+    --secondary: 40 33% 96%;
+    --secondary-foreground: 150 50% 21%;
 
     --muted: 160 13% 95%;
     --muted-foreground: 0 0% 45%;
@@ -33,33 +33,33 @@
 
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 162 19% 52%;
+    --ring: 150 50% 21%;
     --radius: 0.5rem;
 
     /* Chart colors */
-    --chart-1: 162 19% 52%; /* mint green */
-    --chart-2: 49 82% 49%; /* yellow */
+    --chart-1: 150 50% 21%; /* verde */
+    --chart-2: 40 33% 96%; /* blanco */
     --chart-3: 14 68% 51%; /* orange */
     --chart-4: 39 40% 86%; /* tan */
     --chart-5: 210 7% 41%; /* gray */
   }
 
   .dark {
-    /* Dark mode - using black backgrounds from the website */
-    --background: 0 0% 3%;
-    --foreground: 0 0% 95%;
-    --card: 0 0% 7%;
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 7%;
-    --popover-foreground: 0 0% 95%;
+    /* Dark mode - using green backgrounds from the website */
+    --background: 150 50% 21%;
+    --foreground: 40 33% 96%;
+    --card: 150 50% 21%;
+    --card-foreground: 40 33% 96%;
+    --popover: 150 50% 21%;
+    --popover-foreground: 40 33% 96%;
 
-    /* Mint green from the website (#6c9f90) */
-    --primary: 162 19% 52%;
-    --primary-foreground: 0 0% 100%;
+    /* Verde principal (#1a513c) */
+    --primary: 150 50% 21%;
+    --primary-foreground: 40 33% 96%;
 
-    /* Light yellow accent (#e5c315) */
-    --secondary: 49 82% 49%;
-    --secondary-foreground: 0 0% 7%;
+    /* Blanco secundario (#f9f6f1) */
+    --secondary: 40 33% 96%;
+    --secondary-foreground: 150 50% 21%;
 
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 65%;
@@ -74,11 +74,11 @@
 
     --border: 0 0% 20%;
     --input: 0 0% 20%;
-    --ring: 162 19% 52%;
+    --ring: 150 50% 21%;
 
     /* Chart colors */
-    --chart-1: 162 19% 52%; /* mint green */
-    --chart-2: 49 82% 49%; /* yellow */
+    --chart-1: 150 50% 21%; /* verde */
+    --chart-2: 40 33% 96%; /* blanco */
     --chart-3: 14 68% 51%; /* orange */
     --chart-4: 39 40% 86%; /* tan */
     --chart-5: 210 7% 41%; /* gray */
@@ -122,5 +122,14 @@
     100% {
       transform: translateX(-50%);
     }
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
   }
 }

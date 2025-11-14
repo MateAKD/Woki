@@ -23,7 +23,7 @@ export default function CategorySection({ categories }: CategorySectionProps) {
           {categories.map((category) => (
             <div key={category.id} className="relative group aspect-[3/4]">
               <Link href={`/${category.slug.startsWith('productos/') ? category.slug : 'productos/' + category.slug}`} className="block w-full h-full">
-                <div className="w-full h-full bg-black relative overflow-hidden">
+                <div className="w-full h-full bg-[#1a513c] relative overflow-hidden">
                   <Image
                     src={category.imageUrl}
                     alt={category.title}
@@ -32,9 +32,9 @@ export default function CategorySection({ categories }: CategorySectionProps) {
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform duration-300 group-hover:scale-110 opacity-50 group-hover:opacity-75"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex flex-col justify-end items-center text-center p-4">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-black/15 to-transparent flex flex-col justify-end items-center text-center p-4">
                     <h3 className="text-xl lg:text-2xl font-bold text-white uppercase mb-3 leading-tight">{category.title}</h3>
-                    <Button asChild className="w-fit bg-yellow-400 hover:bg-yellow-500 text-black text-xs sm:text-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-sm">
+                    <Button asChild className="w-fit bg-[#00FF86] hover:bg-[#00e676] text-black text-xs sm:text-sm px-3 py-1.5 sm:px-4 sm:py-2 rounded-sm font-bold drop-shadow-lg transition-colors duration-200">
                       <span>VER MAS</span>
                     </Button>
                   </div>

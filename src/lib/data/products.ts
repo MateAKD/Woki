@@ -6,6 +6,8 @@ export interface Product {
   slug: string;
   category: string;
   featured?: boolean;
+  description?: string;
+  images?: string[]; // Array de imágenes adicionales para galería
 }
 
 export const products: Product[] = [
@@ -53,6 +55,17 @@ export const products: Product[] = [
     slug: "veggie/wok-veggie",
     category: "veggie",
     featured: true
+  },
+  {
+    id: "6",
+    title: "Truchon con pure de zanahoria",
+    price: 12000,
+    imageUrl: "/Truchon 1.jpg",
+    slug: "carne/truchon-salsa-agridulce",
+    category: "carne",
+    featured: true,
+    description: "Truchón fresco en salsa agridulce con puré artesanal de zanahoria. Un plato mediano, equilibrado y gourmet: pescado tierno con salsa brillante y costra dorada, junto a un puré suave y cremoso, terminado con sésamo blanco y negro para un toque especial.",
+    images: ["/Truchon 1.jpg", "/Truchon 2.jpg", "/Truchon 3.jpg", "/Truchon 4.jpg"]
   }
 ];
 

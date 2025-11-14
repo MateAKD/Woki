@@ -22,16 +22,16 @@ interface HeroCarouselProps {
 export default function HeroCarousel({ slides }: HeroCarouselProps) {
   const renderSlide = useCallback((slide: HeroSlide) => (
     <CarouselItem key={slide.id}>
-      <div className="relative h-[500px] w-full">
+      <div className="relative h-[500px] w-full shadow-none">
         <Image
           src={slide.imageUrl}
           alt={slide.title}
           fill
           priority={slide.id === slides[0].id}
           sizes="100vw"
-          className="object-cover"
+          className="object-cover shadow-none"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/50 to-transparent flex flex-col justify-center p-10 md:p-20">
+        <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent flex flex-col justify-center p-10 md:p-20">
           <div className="max-w-xl">
             {slide.title && (
               <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
@@ -44,7 +44,7 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
               </p>
             )}
             {slide.buttonText && slide.buttonLink && (
-              <Button asChild size="lg" className="bg-secondary hover:bg-secondary/90 text-black font-bold">
+              <Button asChild size="lg" className="bg-secondary hover:bg-secondary/90 text-[#f9f6f1] font-bold">
                 <Link href={slide.buttonLink}>
                   {slide.buttonText}
                 </Link>
@@ -61,8 +61,8 @@ export default function HeroCarousel({ slides }: HeroCarouselProps) {
       <CarouselContent>
         {slides.map(renderSlide)}
       </CarouselContent>
-      <CarouselPrevious className="left-4 bg-black/50 text-white hover:bg-black" />
-      <CarouselNext className="right-4 bg-black/50 text-white hover:bg-black" />
+      <CarouselPrevious className="left-4 bg-[#1a513c]/50 text-white hover:bg-[#1a513c]" />
+      <CarouselNext className="right-4 bg-[#1a513c]/50 text-white hover:bg-[#1a513c]" />
     </Carousel>
   );
 }

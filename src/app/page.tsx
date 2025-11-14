@@ -12,17 +12,20 @@ export default function Home() {
   return (
     <PageLayout>
       {/* Top promotion banner */}
-      <div className="bg-yellow-400 py-2 px-0 text-black text-center overflow-hidden">
+      <div
+        className="bg-white py-2 px-0 text-black text-center overflow-hidden border-y-2 border-black"
+        style={{ boxSizing: 'border-box' }}
+      >
         <div className="marquee-infinite-row items-center">
           {Array.from({ length: 24 }).map((_, i) => (
             <span 
-              key={`woki-experience-${i}`} 
+              key={`zurdo-experience-${i}`} 
               className="flex items-center mx-2"
             >
               <span className="inline-block font-bold text-base tracking-tight mr-2">
-                WOKI EXPERIENCE
+                ZURDO EXPERIENCE
               </span>
-              <AlertTriangle className="h-5 w-5 inline-block ml-3" />
+              <AlertTriangle className="h-5 w-5 inline-block ml-3 text-black" />
             </span>
           ))}
         </div>
@@ -38,7 +41,7 @@ export default function Home() {
 
       {/* Featured Products - REMOVED */}
       {/*
-      <section className="py-12 bg-black">
+      <section className="py-12 bg-[#1a513c]">
         <div className="container mx-auto">
           <ProductGrid products={featuredProducts} title="PRODUCTOS DESTACADOS" />
         </div>
@@ -47,7 +50,7 @@ export default function Home() {
 
       {/* About/Illustrations Section - REMOVED */}
       {/*
-      <section className="py-16 bg-black">
+      <section className="py-16 bg-[#1a513c]">
         <div className="container mx-auto flex flex-col items-center text-center">
           <Image
             src="https://ext.same-assets.com/513008999/3160495444.svg"
@@ -74,17 +77,23 @@ export default function Home() {
       */}
 
       {/* Instagram Banner */}
-      <section className="bg-black py-4">
+      <section className="bg-[#1a513c] py-4">
         <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
           <div className="text-white text-center md:text-left">
             <h3 className="text-base font-semibold mb-1 uppercase">Seguinos en</h3>
           </div>
-          <Link href="https://www.instagram.com/woki_delivery/" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
+          <Link
+            href="https://www.instagram.com/zurdo_gourmet/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-80 transition-opacity"
+          >
             <Image 
               src="/instagram-icon.png"
-              alt="Instagram Woki Delivery"
+              alt="Instagram Zurdo gourmet"
               width={28}
               height={28}
+              style={{ filter: 'brightness(0) invert(1)' }}
             />
           </Link>
         </div>

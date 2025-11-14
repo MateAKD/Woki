@@ -12,10 +12,11 @@ export default function PageLayout({ children }: PageLayoutProps) {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-1 bg-black text-white">
+      <main className="flex-1 bg-[#1a513c] text-white">
         {children}
       </main>
       <Footer />
+      {/* WhatsappButton with white icon */}
       <WhatsappButton />
     </div>
   );
