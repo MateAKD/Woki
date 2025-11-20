@@ -93,9 +93,9 @@ export default function ProductPage({ params }: ProductPageProps) {
             <div className="flex flex-col md:flex-row gap-0 md:gap-4">
               {/* Miniaturas - Desktop: izquierda, Mobile: arriba (ocultas) */}
               {images.length > 1 && (
-                <div className="hidden md:flex flex-col gap-0.5 order-1 py-1">
+                <div className="hidden md:flex flex-col gap-0.5 order-1 py-1 max-h-[340px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
                   {images.map((image, index) => (
-                    <div key={index} className="p-0.5">
+                    <div key={index} className="p-0.5 flex-shrink-0">
                       <button
                         onClick={() => setSelectedImageIndex(index)}
                         className={`relative w-20 h-20 rounded-md overflow-visible border-2 transition-all ${

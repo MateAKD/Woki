@@ -51,7 +51,7 @@ export const categories: Category[] = [
   {
     id: "8",
     title: "WOK DE CARNE",
-    imageUrl: "/Wok de carne/DSC09455.jpg",
+    imageUrl: "/Wok de carne/DSC09482.jpg",
     slug: "wok-de-carne"
   },
   {
@@ -81,7 +81,7 @@ export const categories: Category[] = [
   {
     id: "13",
     title: "TORTILLA DE PAPA",
-    imageUrl: "/Tortilla de papa/DSC09206.jpg",
+    imageUrl: "/Tortilla de papa/DSC09214.jpg",
     slug: "tortilla-de-papa"
   },
   {
@@ -93,7 +93,7 @@ export const categories: Category[] = [
   {
     id: "15",
     title: "WRAP DE POLLO BBQ",
-    imageUrl: "/Wrap de pollo bbq/DSC09406.jpg",
+    imageUrl: "/Wrap de pollo bbq/DSC09407.jpg",
     slug: "wrap-de-pollo-bbq"
   }
 ];

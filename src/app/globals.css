@@ -132,4 +132,21 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;  /* Chrome, Safari and Opera */
   }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;  /* Firefox */
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;  /* Chrome, Safari and Opera */
+  }
+
+  .scrollbar-thumb-gray-600::-webkit-scrollbar-thumb {
+    background-color: rgb(75 85 99);  /* gray-600 */
+    border-radius: 3px;
+  }
+
+  .scrollbar-track-transparent::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
 }

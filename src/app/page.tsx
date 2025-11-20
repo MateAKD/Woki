@@ -93,8 +93,8 @@ export default function Home() {
 
       {/* Instagram Banner */}
       <section className="bg-[#1a513c] py-4">
-        <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-2">
-          <div className="text-white text-center md:text-left">
+        <div className="container mx-auto flex flex-col md:flex-row items-center justify-center gap-2">
+          <div className="text-white text-center">
             <h3 className="text-base font-semibold mb-1 uppercase">Seguinos en</h3>
           </div>
           <Link

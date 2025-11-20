@@ -16,9 +16,13 @@ interface CategorySectionProps {
 }
 
 export default function CategorySection({ categories }: CategorySectionProps) {
+  // Posiciones personalizadas para centrar mejor los platos
   const customPositions: Record<string, string> = {
     "truchon-salsa-agridulce": "center 80%",
+    "milanesa-con-pure": "center 75%", // Subir un poco más para centrar mejor el plato
+    "tortilla-de-espinaca": "center 75%", // Subir un poco más para centrar mejor el plato
   };
+  const defaultPosition = "center 80%";
 
   return (
     <section className="py-0">
@@ -35,7 +39,7 @@ export default function CategorySection({ categories }: CategorySectionProps) {
                     loading="lazy"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
-                    style={{ objectPosition: customPositions[category.slug] ?? 'center' }}
+                    style={{ objectPosition: customPositions[category.slug] ?? defaultPosition }}
                   />
                   <div className="absolute inset-0 flex flex-col justify-end items-center text-center p-4">
                     <h3 className="text-xl lg:text-2xl font-bold text-white uppercase mb-3 leading-tight drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">{category.title}</h3>

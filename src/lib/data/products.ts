@@ -84,11 +84,11 @@ export const products: Product[] = [
     id: "8",
     title: "Wok de carne",
     price: 8000,
-    imageUrl: "/Wok de carne/DSC09455.jpg",
+    imageUrl: "/Wok de carne/DSC09482.jpg",
     slug: "wok-de-carne",
     featured: true,
     description: "Wok de carne con verduras salteadas y arroz. Un plato asiático vibrante: tiras de carne jugosa salteadas al wok con una mezcla de verduras crujientes que mantienen su textura y color, servido sobre arroz aromático. La cocción rápida preserva los sabores naturales y crea una experiencia fresca y deliciosa.",
-    images: ["/Wok de carne/DSC09455.jpg", "/Wok de carne/DSC09460.jpg", "/Wok de carne/DSC09461.jpg", "/Wok de carne/DSC09467 2.jpg", "/Wok de carne/DSC09475.jpg", "/Wok de carne/DSC09482.jpg"]
+    images: ["/Wok de carne/DSC09482.jpg", "/Wok de carne/DSC09455.jpg", "/Wok de carne/DSC09460.jpg", "/Wok de carne/DSC09461.jpg", "/Wok de carne/DSC09467 2.jpg", "/Wok de carne/DSC09475.jpg"]
   },
   {
     id: "9",
@@ -133,11 +133,11 @@ export const products: Product[] = [
     id: "13",
     title: "Tortilla de papa",
     price: 7000,
-    imageUrl: "/Tortilla de papa/DSC09206.jpg",
+    imageUrl: "/Tortilla de papa/DSC09214.jpg",
     slug: "tortilla-de-papa",
     featured: true,
     description: "Tortilla de papa clásica española. Un plato tradicional y delicioso: tortilla esponjosa preparada con papas tiernas y huevos frescos, cocida a la perfección para lograr una textura cremosa por dentro y dorada por fuera. Un clásico que nunca pasa de moda.",
-    images: ["/Tortilla de papa/DSC09206.jpg", "/Tortilla de papa/DSC09211.jpg", "/Tortilla de papa/DSC09214.jpg", "/Tortilla de papa/DSC09215.jpg", "/Tortilla de papa/DSC09221.jpg", "/Tortilla de papa/DSC09223.jpg", "/Tortilla de papa/DSC09226.jpg", "/Tortilla de papa/DSC09227.jpg", "/Tortilla de papa/DSC09231.jpg", "/Tortilla de papa/DSC09232.jpg", "/Tortilla de papa/DSC09234.jpg", "/Tortilla de papa/DSC09236.jpg", "/Tortilla de papa/DSC09238.jpg", "/Tortilla de papa/DSC09240.jpg", "/Tortilla de papa/DSC09241.jpg", "/Tortilla de papa/DSC09242.jpg"]
+    images: ["/Tortilla de papa/DSC09214.jpg", "/Tortilla de papa/DSC09206.jpg", "/Tortilla de papa/DSC09211.jpg", "/Tortilla de papa/DSC09215.jpg", "/Tortilla de papa/DSC09221.jpg", "/Tortilla de papa/DSC09223.jpg", "/Tortilla de papa/DSC09226.jpg", "/Tortilla de papa/DSC09227.jpg", "/Tortilla de papa/DSC09231.jpg", "/Tortilla de papa/DSC09232.jpg", "/Tortilla de papa/DSC09234.jpg", "/Tortilla de papa/DSC09236.jpg", "/Tortilla de papa/DSC09238.jpg", "/Tortilla de papa/DSC09240.jpg", "/Tortilla de papa/DSC09241.jpg", "/Tortilla de papa/DSC09242.jpg"]
   },
   {
     id: "14",
@@ -153,11 +153,11 @@ export const products: Product[] = [
     id: "15",
     title: "Wrap de pollo BBQ",
     price: 7000,
-    imageUrl: "/Wrap de pollo bbq/DSC09406.jpg",
+    imageUrl: "/Wrap de pollo bbq/DSC09407.jpg",
     slug: "wrap-de-pollo-bbq",
     featured: true,
     description: "Wrap de pollo BBQ con barbacoa casera. Un plato práctico y lleno de sabor: pollo tierno marinado en salsa barbacoa casera con un equilibrio perfecto entre lo dulce y lo ahumado, envuelto en una tortilla suave junto con vegetales frescos que aportan crujiente y frescura.",
-    images: ["/Wrap de pollo bbq/DSC09406.jpg", "/Wrap de pollo bbq/DSC09407.jpg", "/Wrap de pollo bbq/DSC09408.jpg", "/Wrap de pollo bbq/DSC09411.jpg"]
+    images: ["/Wrap de pollo bbq/DSC09407.jpg", "/Wrap de pollo bbq/DSC09406.jpg", "/Wrap de pollo bbq/DSC09408.jpg", "/Wrap de pollo bbq/DSC09411.jpg"]
   }
 ];
 
