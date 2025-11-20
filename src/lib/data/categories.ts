@@ -15,61 +15,61 @@ export const categories: Category[] = [
   {
     id: "2",
     title: "PESCADO CON VEGETALES",
-    imageUrl: "/Pescado con vegetales/DSC09501.jpg",
+    imageUrl: "/placeholder.jpg",
     slug: "pescado-con-vegetales"
   },
   {
     id: "3",
     title: "CARNE AL HORNO",
-    imageUrl: "/Carne al horno con papas/DSC09277.jpg",
+    imageUrl: "/placeholder.jpg",
     slug: "carne-al-horno"
   },
   {
     id: "4",
     title: "BONDIOLA A LA MOSTAZA",
-    imageUrl: "/Bondiola a la mostaza/DSC09340.jpg",
+    imageUrl: "/placeholder.jpg",
     slug: "bondiola-a-la-mostaza"
   },
   {
     id: "5",
     title: "ALBÓNDIGAS DE POLLO",
-    imageUrl: "/Albondigas de pollo/DSC09326.jpg",
+    imageUrl: "/placeholder.jpg",
     slug: "albondigas-de-pollo"
   },
   {
     id: "6",
     title: "GNOCCHIS",
-    imageUrl: "/Gnocchis/DSC09260.jpg",
+    imageUrl: "/placeholder.jpg",
     slug: "gnocchis"
   },
   {
     id: "7",
     title: "ARROZ CON POLLO SPICY",
-    imageUrl: "/Arroz con pollo spicy/DSC09496.jpg",
+    imageUrl: "/placeholder.jpg",
     slug: "arroz-con-pollo-spicy"
   },
   {
     id: "8",
     title: "WOK DE CARNE",
-    imageUrl: "/Wok de carne/DSC09455.jpg",
+    imageUrl: "/placeholder.jpg",
     slug: "wok-de-carne"
   },
   {
     id: "9",
     title: "MILANESA CON PURÉ",
-    imageUrl: "/Milanesa con pure/DSC09353.jpg",
+    imageUrl: "/placeholder.jpg",
     slug: "milanesa-con-pure"
   },
   {
     id: "10",
     title: "RISSOTO DE HONGOS",
-    imageUrl: "/Rissoto de hongos/DSC09382.jpg",
+    imageUrl: "/placeholder.jpg",
     slug: "rissoto-de-hongos"
   },
   {
     id: "11",
     title: "PASTEL DE PAPA",
-    imageUrl: "/Pastel de papa/DSC09484.jpg",
+    imageUrl: "/placeholder.jpg",
     slug: "pastel-de-papa"
   },
   {
@@ -81,19 +81,19 @@ export const categories: Category[] = [
   {
     id: "13",
     title: "TORTILLA DE PAPA",
-    imageUrl: "/Tortilla de papa/DSC09206.jpg",
+    imageUrl: "/placeholder.jpg",
     slug: "tortilla-de-papa"
   },
   {
     id: "14",
     title: "TORTILLA DE ESPINACA",
-    imageUrl: "/Tortilla de espinaca/DSC09180.jpg",
+    imageUrl: "/placeholder.jpg",
     slug: "tortilla-de-espinaca"
   },
   {
     id: "15",
     title: "WRAP DE POLLO BBQ",
-    imageUrl: "/Wrap de pollo bbq/DSC09406.jpg",
+    imageUrl: "/placeholder.jpg",
     slug: "wrap-de-pollo-bbq"
   }
 ];
