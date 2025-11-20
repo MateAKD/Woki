@@ -22,36 +22,39 @@ interface HeroCarouselProps {
 export default function HeroCarousel({ slides }: HeroCarouselProps) {
   const renderSlide = useCallback((slide: HeroSlide) => (
     <CarouselItem key={slide.id}>
-      <div className="relative h-[500px] w-full shadow-none">
+      <div className="relative h-[500px] w-full bg-[#1a513c] overflow-hidden">
         <Image
           src={slide.imageUrl}
           alt={slide.title}
           fill
           priority={slide.id === slides[0].id}
           sizes="100vw"
-          className="object-cover shadow-none"
+          className="object-cover"
+          style={{ transform: 'translateY(-15%)' }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent flex flex-col justify-center p-10 md:p-20">
-          <div className="max-w-xl">
-            {slide.title && (
-              <h2 className="text-4xl md:text-6xl font-bold text-white mb-4">
-                {slide.title}
-              </h2>
-            )}
-            {slide.subtitle && (
-              <p className="text-xl md:text-2xl text-white/90 mb-8">
-                {slide.subtitle}
-              </p>
-            )}
-            {slide.buttonText && slide.buttonLink && (
-              <Button asChild size="lg" className="bg-secondary hover:bg-secondary/90 text-[#f9f6f1] font-bold">
-                <Link href={slide.buttonLink}>
-                  {slide.buttonText}
-                </Link>
-              </Button>
-            )}
+        {(slide.title || slide.subtitle || slide.buttonText) && (
+          <div className="absolute inset-0 flex flex-col justify-center p-10 md:p-20">
+            <div className="max-w-xl">
+              {slide.title && (
+                <h2 className="text-4xl md:text-6xl font-bold text-white mb-4 drop-shadow-lg">
+                  {slide.title}
+                </h2>
+              )}
+              {slide.subtitle && (
+                <p className="text-xl md:text-2xl text-white/90 mb-8 drop-shadow-lg">
+                  {slide.subtitle}
+                </p>
+              )}
+              {slide.buttonText && slide.buttonLink && (
+                <Button asChild size="lg" className="bg-secondary hover:bg-secondary/90 text-[#f9f6f1] font-bold">
+                  <Link href={slide.buttonLink}>
+                    {slide.buttonText}
+                  </Link>
+                </Button>
+              )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </CarouselItem>
   ), [slides]);

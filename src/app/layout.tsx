@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "Zurdo Web",
   description: "Comprá productos de Zurdo por internet. Tenemos woks especiales y más. Hacé tu pedido y pagalo online.",
   icons: {
-    icon: "/ZURDO LOGO.jpg",
+    icon: "/LOGO.CIRCULO.1.png",
   },
 };
 

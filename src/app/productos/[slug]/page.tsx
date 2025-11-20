@@ -119,7 +119,7 @@ export default function ProductPage({ params }: ProductPageProps) {
               )}
               
               {/* Imagen principal */}
-              <div className="bg-primary/20 rounded-lg overflow-hidden flex-1 order-2 md:order-2 flex items-center justify-center">
+              <div className="bg-primary/20 rounded-lg overflow-hidden flex-1 order-2 md:order-2 flex items-center justify-center mt-6  md:mt-8">
                 {images.length > 1 ? (
                   <>
                     {/* Mobile: Carousel con swipe */}
@@ -128,13 +128,12 @@ export default function ProductPage({ params }: ProductPageProps) {
                         <CarouselContent>
                           {images.map((image, index) => (
                             <CarouselItem key={index}>
-                              <div className="relative w-full h-[600px] overflow-hidden flex items-center justify-center mb-0">
-                                <Image
+                              <div className="relative w-full h-[600px] overflow-hidden flex items-center justify-center mb-0 bg-[#1a513c]">
+                                <img
                                   src={image}
                                   alt={`${product.title} - Imagen ${index + 1}`}
-                                  fill
-                                  className="object-contain scale-100 object-center"
-                                  priority={index === 0}
+                                  className="w-full h-full object-contain"
+                                  loading={index === 0 ? "eager" : "lazy"}
                                 />
                               </div>
                             </CarouselItem>
@@ -149,22 +148,39 @@ export default function ProductPage({ params }: ProductPageProps) {
                           src={images[selectedImageIndex]}
                           alt={`${product.title} - Imagen ${selectedImageIndex + 1}`}
                           fill
-                          className="object-contain scale-100 object-center"
+                          quality={95}
+                          sizes="(max-width: 768px) 900px, 50vw"
+                          unoptimized
+                          className="object-contain md:object-cover scale-100 object-center"
                           priority={selectedImageIndex === 0}
                         />
                       </div>
                     </div>
                   </>
                 ) : (
-                  <div className="relative w-full h-[600px] md:h-auto md:min-h-[500px] md:aspect-square overflow-hidden flex items-center justify-center">
-                    <Image
-                      src={images[0]}
-                      alt={product.title}
-                      fill
-                      className="object-contain scale-100 object-center"
-                      priority
-                    />
-                  </div>
+                  <>
+                    {/* Mobile: imagen sin optimizar */}
+                    <div className="md:hidden relative w-full h-[600px] overflow-hidden flex items-center justify-center bg-[#1a513c]">
+                      <img
+                        src={images[0]}
+                        alt={product.title}
+                        className="w-full h-full object-contain"
+                        loading="eager"
+                      />
+                    </div>
+                    {/* Desktop: imagen optimizada */}
+                    <div className="hidden md:flex relative w-full h-auto min-h-[500px] aspect-square overflow-hidden flex items-center justify-center">
+                      <Image
+                        src={images[0]}
+                        alt={product.title}
+                        fill
+                        quality={95}
+                        sizes="50vw"
+                        className="object-contain md:object-cover scale-100 object-center"
+                        priority
+                      />
+                    </div>
+                  </>
                 )}
               </div>
               
@@ -187,6 +203,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                             alt={`${product.title} - Miniatura ${index + 1}`}
                             fill
                             className="object-cover"
+                            unoptimized
                           />
                         </div>
                       </button>
@@ -232,7 +249,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
                 {/* Add to Cart Button */}
                 <Button
-                  className="w-full bg-primary hover:bg-primary/90 flex items-center justify-center gap-2"
+                  className="w-full bg-[#10e35b] hover:bg-[#05c14a] flex items-center justify-center gap-2 text-white font-bold shadow-lg transition-all duration-200"
                   onClick={handleAddToCart}
                 >
                   <ShoppingBasket className="h-5 w-5" />
@@ -256,16 +273,15 @@ export default function ProductPage({ params }: ProductPageProps) {
           <h2 className="text-xl font-bold mb-4">Información de Envío</h2>
           <div className="border border-gray-700 rounded-md p-4">
             <p className="mb-4">
-              Entregamos en toda la Ciudad de Buenos Aires y Gran Buenos Aires. El costo del envío depende de la zona de entrega.
+              Entregamos en toda la Ciudad de Buenos Aires y Gran Buenos Aires con envío sin costo.
             </p>
             <div className="space-y-2 text-[#f9f6f1]">
-              <div>• Zona Norte → martes y jueves</div>
-              <div>• Capital y otros → domingos</div>
+              <div>• Zona Norte</div>
+              <div>• Capital y otros</div>
             </div>
             <p className="mt-4">
               Para recibir tu pedido, hacelo antes de las 18:00hs del día previo a la entrega.<br/>
-              🛵 Envíos a domicilio: compra mínima de 5 productos<br/>
-              📍 Si retirás por pick-up, no hay mínimo de compra
+              🛵 Envío sin costo: mínimo de compra de 5 productos
             </p>
           </div>
         </div>

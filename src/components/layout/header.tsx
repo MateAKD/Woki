@@ -3,11 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useCallback, useMemo } from "react";
-import { ShoppingBasket, Search, Menu, X, ChevronDown } from "lucide-react";
+import { ShoppingBasket, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu";
+import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@/components/ui/navigation-menu";
 import CartDrawer from "@/components/ui/cart/cart-drawer";
 import { useCart } from "@/lib/context/cart-context";
 import { products } from "@/lib/data/products";
@@ -49,7 +48,7 @@ export default function Header() {
       </div> */}
 
       {/* Main header */}
-      <div className="container mx-auto py-4 flex items-center justify-between">
+      <div className="container mx-auto py-2 sm:py-3 md:py-4 flex items-center justify-between">
         {/* Mobile menu trigger */}
         <Button
           variant="ghost"
@@ -64,46 +63,33 @@ export default function Header() {
         <div className="absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none md:left-0">
           <Link href="/">
             <Image
-              src="/ZURDO LOGO.jpg"
+              src="/COMPLETO.CREMA.png"
               alt="ZURDO"
-              width={100}
-              height={100}
-              className="h-16 w-auto"
+              width={150}
+              height={150}
+              className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto"
             />
           </Link>
         </div>
 
         {/* Desktop Navigation - hidden on mobile */}
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden md:flex items-center space-x-10">
           <NavigationMenu>
-            <NavigationMenuList>
+            <NavigationMenuList className="space-x-4">
               <NavigationMenuItem>
                 <NavigationMenuLink href="/" className="text-white hover:text-[#f9f6f1]">
                   Inicio
                 </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <NavigationMenuTrigger className="text-white hover:text-[#f9f6f1] bg-[#1a513c]">
+                <NavigationMenuLink href="/productos" className="text-white hover:text-[#f9f6f1]">
                   Productos
-                </NavigationMenuTrigger>
-                <NavigationMenuContent>
-                  <div className="grid grid-cols-2 gap-4 p-4 w-[400px]">
-                    {products.map((product) => (
-                      <NavigationMenuLink
-                        key={product.id}
-                        asChild
-                        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                      >
-                        <Link href={`/productos/${product.slug}`}>
-                          <div className="text-sm font-medium leading-none">{product.title}</div>
-                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                            ${product.price}
-                          </p>
-                        </Link>
-                      </NavigationMenuLink>
-                    ))}
-                  </div>
-                </NavigationMenuContent>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+              <NavigationMenuItem>
+                <NavigationMenuLink href="/nosotros" className="text-white hover:text-[#f9f6f1]">
+                  Nosotros
+                </NavigationMenuLink>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <NavigationMenuLink href="/#contactanos" className="text-white hover:text-[#f9f6f1]">
@@ -169,11 +155,11 @@ export default function Header() {
         <div className="flex justify-between items-center p-4 border-b border-gray-800">
           <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
             <Image
-              src="/ZURDO LOGO.jpg"
+              src="/COMPLETO.CREMA.png"
               alt="ZURDO"
-              width={100}
-              height={100}
-              className="h-16 w-auto"
+              width={150}
+              height={150}
+              className="h-12 sm:h-16 w-auto"
             />
           </Link>
           <Button
@@ -216,57 +202,20 @@ export default function Header() {
             >
               Inicio
             </Link>
-            {/* Mobile Products Menu */}
-            <div className="text-white">
-              <button
-                className="flex items-center justify-between w-full hover:text-[#f9f6f1]"
-                onClick={(e) => {
-                  const nextEl = e.currentTarget.nextElementSibling;
-                  if (nextEl && nextEl.tagName === 'UL') {
-                    (nextEl as HTMLElement).classList.toggle("hidden");
-                  }
-                }}
-              >
-                Productos <ChevronDown className="h-4 w-4" />
-              </button>
-              <ul className="ml-4 mt-2 space-y-2 hidden">
-                <li>
-                  <button
-                    className="flex items-center justify-between w-full hover:text-[#f9f6f1]"
-                    onClick={(e) => {
-                      const nextEl = e.currentTarget.nextElementSibling;
-                      if (nextEl && nextEl.tagName === 'UL') {
-                        (nextEl as HTMLElement).classList.toggle("hidden");
-                      }
-                    }}
-                  >
-                    Carne <ChevronDown className="h-4 w-4" />
-                  </button>
-                  <ul className="ml-4 mt-2 space-y-2 hidden">
-                    <li><Link href="/productos/carne/wok-lomo" className="text-white hover:text-[#f9f6f1]" onClick={() => setIsMobileMenuOpen(false)}>Lomo</Link></li>
-                    <li>
-                      <button
-                        className="flex items-center justify-between w-full hover:text-[#f9f6f1]"
-                        onClick={(e) => {
-                          const nextEl = e.currentTarget.nextElementSibling;
-                          if (nextEl && nextEl.tagName === 'UL') {
-                            (nextEl as HTMLElement).classList.toggle("hidden");
-                          }
-                        }}
-                      >
-                        Pollo <ChevronDown className="h-4 w-4" />
-                      </button>
-                      <ul className="ml-4 mt-2 space-y-2 hidden">
-                        <li><Link href="/productos/carne/pollo" className="text-white hover:text-[#f9f6f1]" onClick={() => setIsMobileMenuOpen(false)}>Pollo</Link></li>
-                        <li><Link href="/productos/carne/pollo-spicy" className="text-white hover:text-[#f9f6f1]" onClick={() => setIsMobileMenuOpen(false)}>Spicy</Link></li>
-                      </ul>
-                    </li>
-                    <li><Link href="/productos/carne/langostinos" className="text-white hover:text-[#f9f6f1]" onClick={() => setIsMobileMenuOpen(false)}>Langostinos</Link></li>
-                  </ul>
-                </li>
-                <li><Link href="/productos/veggie/wok-veggie" className="text-white hover:text-[#f9f6f1]" onClick={() => setIsMobileMenuOpen(false)}>Veggie</Link></li>
-              </ul>
-            </div>
+            <Link
+              href="/productos"
+              className="text-white hover:text-[#f9f6f1]"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Productos
+            </Link>
+            <Link
+              href="/nosotros"
+              className="text-white hover:text-[#f9f6f1]"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Nosotros
+            </Link>
             <Link
               href="/#contactanos"
               className="text-white hover:text-[#f9f6f1]"
@@ -280,18 +229,3 @@ export default function Header() {
     </header>
   );
 }
-
-// ListItem component for NavigationMenu
-const ListItem = ({ href, title, children }: { href: string; title: string; children?: React.ReactNode }) => (
-  <li>
-    <NavigationMenuLink asChild>
-      <Link
-        href={href}
-        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-      >
-        <div className="text-sm font-medium leading-none">{title}</div>
-        {children && <div className="line-clamp-2 text-sm leading-snug text-muted-foreground">{children}</div>}
-      </Link>
-    </NavigationMenuLink>
-  </li>
-);

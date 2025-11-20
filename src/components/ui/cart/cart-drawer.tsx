@@ -23,7 +23,6 @@ export default function CartDrawer() {
     clearCart // Used in handleFinalizarCompra function
   } = useCart();
 
-  const [deliveryType, setDeliveryType] = useState<'envio' | 'pickup'>('pickup');
   const [showErrorDialog, setShowErrorDialog] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [showSuccessDialog, setShowSuccessDialog] = useState(false);
@@ -32,12 +31,11 @@ export default function CartDrawer() {
   const [customerName, setCustomerName] = useState('');
   const [address, setAddress] = useState('');
   const [floorApt, setFloorApt] = useState('');
-  const [deliveryZone, setDeliveryZone] = useState<'zona_norte_martes' | 'zona_norte_jueves' | 'capital_otros' | ''>('');
+  const [deliveryZone, setDeliveryZone] = useState<'zona_norte' | 'capital_otros' | ''>('');
   const [paymentMethod, setPaymentMethod] = useState<'mercado_pago' | 'transferencia' | 'efectivo' | ''>('');
   
   const CANTIDAD_MINIMA_ENVIO = 5;
-  const envioCosto = 1000;
-  const totalConEnvio = deliveryType === 'envio' ? totalPrice + envioCosto : totalPrice;
+  const totalConEnvio = totalPrice;
   
   const formattedTotalPrice = new Intl.NumberFormat('es-AR', {
     style: 'currency',
@@ -53,7 +51,7 @@ export default function CartDrawer() {
   
   // Función para generar el mensaje de WhatsApp
   const generateWhatsAppMessage = () => {
-    let message = "Hola! Quiero pagar la compra que hice por la página:\n\n";
+    let message = "Hola! Quiero ZURDO en mi freezer YA:\n\n";
     
     // Lista de productos
     items.forEach(item => {
@@ -64,28 +62,22 @@ export default function CartDrawer() {
     });
     
     // Total
-    message += `\nTotal: ${formattedTotalConEnvio}\n`;
+    message += `\nTotal: ${formattedTotalConEnvio} (Envío sin costo)\n`;
     
-    // Tipo de entrega
-    message += `Tipo de entrega: ${deliveryType === 'envio' ? 'Envío a domicilio' : 'Retiro por pick-up'}\n`;
-    
-    // Información adicional para envío a domicilio
-    if (deliveryType === 'envio') {
-      message += `\nDatos de envío:\n`;
-      message += `Nombre: ${customerName}\n`;
-      message += `Dirección: ${address}\n`;
-      if (floorApt) {
-        message += `Piso/Depto: ${floorApt}\n`;
-      }
-      
-      // Zona de entrega
-      let zonaTexto = '';
-      if (deliveryZone === 'zona_norte_martes') zonaTexto = 'Zona Norte (martes)';
-      else if (deliveryZone === 'zona_norte_jueves') zonaTexto = 'Zona Norte (jueves)';
-      else if (deliveryZone === 'capital_otros') zonaTexto = 'Capital y otros (domingos)';
-      
-      message += `Zona de entrega: ${zonaTexto}\n`;
+    // Información de envío
+    message += `\nDatos de envío:\n`;
+    message += `Nombre: ${customerName}\n`;
+    message += `Dirección: ${address}\n`;
+    if (floorApt) {
+      message += `Piso/Depto: ${floorApt}\n`;
     }
+    
+    // Zona de entrega
+    let zonaTexto = '';
+    if (deliveryZone === 'zona_norte') zonaTexto = 'Zona Norte';
+    else if (deliveryZone === 'capital_otros') zonaTexto = 'Capital y otros';
+    
+    message += `Zona de entrega: ${zonaTexto}\n`;
     
     // Método de pago
     let metodoPagoTexto = '';
@@ -101,44 +93,42 @@ export default function CartDrawer() {
   // Función para finalizar la compra
   const handleFinalizarCompra = () => {
     try {
-      // Validar si es envío y cumple con la cantidad mínima
-      if (deliveryType === 'envio' && totalItems < CANTIDAD_MINIMA_ENVIO) {
-        setErrorMessage(`La cantidad mínima para envío a domicilio es de ${CANTIDAD_MINIMA_ENVIO} productos`);
+      // Validar que haya productos en el carrito
+      if (items.length === 0) {
+        setErrorMessage('No hay productos en el carrito');
         setShowErrorDialog(true);
         return;
       }
       
-      // Validar campos obligatorios para envío
-      if (deliveryType === 'envio') {
-        if (!customerName.trim()) {
-          setErrorMessage('Por favor ingresa tu nombre');
-          setShowErrorDialog(true);
-          return;
-        }
-        
-        if (!address.trim()) {
-          setErrorMessage('Por favor ingresa tu dirección');
-          setShowErrorDialog(true);
-          return;
-        }
-        
-        if (!deliveryZone) {
-          setErrorMessage('Por favor selecciona una zona de entrega');
-          setShowErrorDialog(true);
-          return;
-        }
+      // Validar cantidad mínima
+      if (totalItems < CANTIDAD_MINIMA_ENVIO) {
+        setErrorMessage(`La cantidad mínima de compra es de ${CANTIDAD_MINIMA_ENVIO} productos`);
+        setShowErrorDialog(true);
+        return;
+      }
+      
+      // Validar campos obligatorios
+      if (!customerName.trim()) {
+        setErrorMessage('Por favor ingresa tu nombre');
+        setShowErrorDialog(true);
+        return;
+      }
+      
+      if (!address.trim()) {
+        setErrorMessage('Por favor ingresa tu dirección');
+        setShowErrorDialog(true);
+        return;
+      }
+      
+      if (!deliveryZone) {
+        setErrorMessage('Por favor selecciona una zona de entrega');
+        setShowErrorDialog(true);
+        return;
       }
       
       // Validar método de pago
       if (!paymentMethod) {
         setErrorMessage('Por favor selecciona un método de pago');
-        setShowErrorDialog(true);
-        return;
-      }
-      
-      // Validar que haya productos en el carrito
-      if (items.length === 0) {
-        setErrorMessage('No hay productos en el carrito');
         setShowErrorDialog(true);
         return;
       }
@@ -313,44 +303,8 @@ export default function CartDrawer() {
 
                 <Separator className="bg-gray-800" />
 
-                {/* Opciones de entrega */}
-                <div className="flex flex-col gap-2 mb-2">
-                  <div className="text-sm font-medium mb-2">Tipo de entrega:</div>
-                  <div className="grid grid-cols-2 gap-2">
-                    <button
-                      type="button"
-                      className={`p-3 border-2 rounded-md flex items-center justify-center transition-all
-                        ${deliveryType === 'pickup'
-                          ? 'border-white bg-white text-black shadow-lg scale-95'
-                          : 'border-gray-700 text-white bg-transparent hover:border-gray-600'
-                        }`}
-                      onClick={() => setDeliveryType('pickup')}
-                    >
-                      <div className="text-center">
-                        <div className="font-medium">Retiro por pick-up</div>
-                        <div className="text-xs text-gray-400">Sin costo</div>
-                      </div>
-                    </button>
-                    <button
-                      type="button"
-                      className={`p-3 border-2 rounded-md flex items-center justify-center transition-all
-                        ${deliveryType === 'envio'
-                          ? 'border-white bg-white text-black shadow-lg scale-95'
-                          : 'border-gray-700 text-white bg-transparent hover:border-gray-600'
-                        }`}
-                      onClick={() => setDeliveryType('envio')}
-                    >
-                      <div className="text-center">
-                        <div className="font-medium">Envío a domicilio</div>
-                        <div className="text-xs text-gray-400">+$1000</div>
-                      </div>
-                    </button>
-                  </div>
-                </div>
-
                 {/* Formulario para datos de envío */}
-                {deliveryType === 'envio' && (
-                  <div className="mt-4 border border-gray-800 rounded-md p-3 space-y-3">
+                <div className="mt-4 border border-gray-800 rounded-md p-3 space-y-3">
                     <h3 className="font-medium">Datos de envío</h3>
                     
                     <div>
@@ -391,29 +345,21 @@ export default function CartDrawer() {
                       <div className="grid grid-cols-1 gap-2">
                         <button
                           type="button"
-                          className={`p-2 border-2 rounded-md flex items-center justify-center text-sm transition-all ${deliveryZone === 'zona_norte_martes' ? 'border-[#f9f6f1] bg-[#f9f6f1] text-black shadow-lg scale-95' : 'border-gray-800 text-white hover:border-gray-700'}`}
-                          onClick={() => setDeliveryZone('zona_norte_martes')}
+                          className={`p-2 border-2 rounded-md flex items-center justify-center text-sm transition-all ${deliveryZone === 'zona_norte' ? 'border-[#f9f6f1] bg-[#f9f6f1] text-black shadow-lg scale-95' : 'border-gray-800 text-white hover:border-gray-700'}`}
+                          onClick={() => setDeliveryZone('zona_norte')}
                         >
-                          Zona Norte (martes)
-                        </button>
-                        <button
-                          type="button"
-                          className={`p-2 border-2 rounded-md flex items-center justify-center text-sm transition-all ${deliveryZone === 'zona_norte_jueves' ? 'border-[#f9f6f1] bg-[#f9f6f1] text-black shadow-lg scale-95' : 'border-gray-800 text-white hover:border-gray-700'}`}
-                          onClick={() => setDeliveryZone('zona_norte_jueves')}
-                        >
-                          Zona Norte (jueves)
+                          Zona Norte
                         </button>
                         <button
                           type="button"
                           className={`p-2 border-2 rounded-md flex items-center justify-center text-sm transition-all ${deliveryZone === 'capital_otros' ? 'border-[#f9f6f1] bg-[#f9f6f1] text-black shadow-lg scale-95' : 'border-gray-800 text-white hover:border-gray-700'}`}
                           onClick={() => setDeliveryZone('capital_otros')}
                         >
-                          Capital y otros (domingo)
+                          Capital y otros
                         </button>
                       </div>
                     </div>
                   </div>
-                )}
                 
                 {/* Método de pago */}
                 <div className="mt-4 border border-gray-800 rounded-md p-3 space-y-3">
@@ -449,9 +395,15 @@ export default function CartDrawer() {
                   </div>
                 </div>
                 
-                <div className="flex justify-between font-bold text-lg mt-4">
-                  <span>Total:</span>
-                  <span>{formattedTotalConEnvio}</span>
+                <div className="space-y-2 mt-4">
+                  <div className="flex justify-between text-sm">
+                    <span>Envío:</span>
+                    <span className="text-green-400 font-semibold">Sin costo</span>
+                  </div>
+                  <div className="flex justify-between font-bold text-lg">
+                    <span>Total:</span>
+                    <span>{formattedTotalConEnvio}</span>
+                  </div>
                 </div>
 
                 <Button 
@@ -469,10 +421,10 @@ export default function CartDrawer() {
                 </Button>
 
                 {/* Mensaje de mínimo de compra */}
-                {deliveryType === 'envio' && totalItems < CANTIDAD_MINIMA_ENVIO && (
-                  <div className="mt-4 text-center text-[#1a513c] font-semibold flex items-center justify-center gap-2">
+                {totalItems < CANTIDAD_MINIMA_ENVIO && (
+                  <div className="mt-4 text-center text-yellow-400 font-semibold flex items-center justify-center gap-2">
                     <AlertCircle className="h-4 w-4" />
-                    La cantidad mínima de compra para envíos es de {CANTIDAD_MINIMA_ENVIO} productos
+                    La cantidad mínima de compra es de {CANTIDAD_MINIMA_ENVIO} productos
                   </div>
                 )}
               </div>

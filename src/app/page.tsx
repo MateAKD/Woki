@@ -3,11 +3,18 @@ import Link from "next/link";
 import PageLayout from "@/components/layout/page-layout";
 import CategorySection from "@/components/home/category-section";
 import { categories } from "@/lib/data/categories";
-import { AlertTriangle } from 'lucide-react';
+import { Dot } from 'lucide-react';
 
 export default function Home() {
-  // Only use the first 5 categories for the homepage
-  const homeCategories = categories.slice(0, 5);
+  // Mostrar solo estos productos en el inicio
+  const featuredSlugs = [
+    "truchon-salsa-agridulce",
+    "bondiola-a-la-mostaza",
+    "carne-al-horno",
+    "tortilla-de-papa",
+    "wrap-de-pollo-bbq"
+  ];
+  const homeCategories = categories.filter(cat => featuredSlugs.includes(cat.slug));
 
   return (
     <PageLayout>
@@ -23,9 +30,17 @@ export default function Home() {
               className="flex items-center mx-2"
             >
               <span className="inline-block font-bold text-base tracking-tight mr-2">
-                ZURDO EXPERIENCE
+                RICO
               </span>
-              <AlertTriangle className="h-5 w-5 inline-block ml-3 text-black" />
+              <Dot className="h-5 w-5 inline-block text-black" />
+              <span className="inline-block font-bold text-base tracking-tight mx-2">
+                RAPIDO
+              </span>
+              <Dot className="h-5 w-5 inline-block text-black" />
+              <span className="inline-block font-bold text-base tracking-tight mx-2">
+                REAL
+              </span>
+              <Dot className="h-5 w-5 inline-block text-black" />
             </span>
           ))}
         </div>

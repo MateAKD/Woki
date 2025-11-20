@@ -103,7 +103,7 @@
   .marquee-infinite-row {
     display: flex;
     width: max-content;
-    animation: marquee-infinite-row 20s linear infinite;
+    animation: marquee-infinite-row 40s linear infinite;
   }
 
   @keyframes marquee {

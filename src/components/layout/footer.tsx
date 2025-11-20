@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Instagram, Phone, Mail, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 export default function Footer() {
@@ -46,15 +46,6 @@ export default function Footer() {
                     style={{ filter: 'brightness(0) invert(1)' }}
                   />
                   +54 9 11 3410-0409
-                </Link>
-              </li>
-              <li className="flex items-center justify-center md:justify-start gap-2">
-                <Link
-                  href="mailto:Zurdo_delivery@gmail.com"
-                  className="flex items-center text-gray-300 hover:text-primary transition-colors"
-                >
-                  <Mail className="h-4 w-4 mr-2" />
-                  Zurdo_delivery@gmail.com
                 </Link>
               </li>
               <li className="flex items-center justify-center md:justify-start gap-2">
