@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { useCart } from "@/lib/context/cart-context";
 import { ShoppingBasket, Plus, Minus, Trash2, AlertCircle } from "lucide-react";
 import Image from "next/image";
@@ -32,7 +32,7 @@ export default function CartDrawer() {
   const [address, setAddress] = useState('');
   const [floorApt, setFloorApt] = useState('');
   const [deliveryZone, setDeliveryZone] = useState<'zona_norte' | 'capital_otros' | ''>('');
-  const [paymentMethod, setPaymentMethod] = useState<'mercado_pago' | 'transferencia' | 'efectivo' | ''>('');
+  const [paymentMethod, setPaymentMethod] = useState<'transferencia' | 'efectivo' | ''>('');
   
   const CANTIDAD_MINIMA_ENVIO = 5;
   const totalConEnvio = totalPrice;
@@ -81,8 +81,7 @@ export default function CartDrawer() {
     
     // Método de pago
     let metodoPagoTexto = '';
-    if (paymentMethod === 'mercado_pago') metodoPagoTexto = 'Mercado Pago';
-    else if (paymentMethod === 'transferencia') metodoPagoTexto = 'Transferencia bancaria';
+    if (paymentMethod === 'transferencia') metodoPagoTexto = 'Transferencia bancaria';
     else if (paymentMethod === 'efectivo') metodoPagoTexto = 'Efectivo';
     
     message += `\nMétodo de pago: ${metodoPagoTexto}`;
@@ -213,6 +212,9 @@ export default function CartDrawer() {
         <SheetContent side="right" className="w-full sm:w-96 bg-[#1a513c] border-gray-800 p-0 overflow-auto">
         <SheetHeader>
           <SheetTitle className="sr-only">Carrito de compras</SheetTitle>
+          <SheetDescription className="sr-only">
+            Panel lateral con los productos agregados al carrito de compras
+          </SheetDescription>
         </SheetHeader>
         <div className="flex flex-col h-full">
           <div className="flex items-center justify-between p-4 border-b border-gray-800 flex-shrink-0">
@@ -365,15 +367,6 @@ export default function CartDrawer() {
                 <div className="mt-4 border border-gray-800 rounded-md p-3 space-y-3">
                   <h3 className="font-medium">Método de pago *</h3>
                   <div className="grid grid-cols-1 gap-2">
-                    <button
-                      type="button"
-                      className={`p-2 border-2 rounded-md flex items-center justify-center text-sm transition-all ${
-                        paymentMethod === 'mercado_pago' ? 'border-[#1a513c] bg-white text-black shadow-lg scale-95' : 'border-gray-800 text-white hover:border-gray-700'
-                      }`}
-                      onClick={() => setPaymentMethod('mercado_pago')}
-                    >
-                      Mercado Pago
-                    </button>
                     <button
                       type="button"
                       className={`p-2 border-2 rounded-md flex items-center justify-center text-sm transition-all ${

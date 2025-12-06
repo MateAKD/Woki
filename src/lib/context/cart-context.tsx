@@ -1,7 +1,7 @@
 "use client";
 
 import { Product } from "@/lib/data/products";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState, useRef } from "react";
 
 export interface CartItem {
   product: Product;
@@ -18,6 +18,8 @@ interface CartContextType {
   clearCart: () => void;
   isCartOpen: boolean;
   setIsCartOpen: (isOpen: boolean) => void;
+  toastMessage: string | null;
+  showToast: (message: string) => void;
 }
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -27,6 +29,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [totalItems, setTotalItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const pendingAddsRef = useRef<Map<string, number>>(new Map());
 
   // Initialize cart from localStorage
   useEffect(() => {
@@ -56,24 +60,74 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
   }, [items]);
 
+  // Show toast notification
+  const showToast = (message: string) => {
+    setToastMessage(message);
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 3000);
+  };
+
   // Add a product to the cart
   const addItem = (product: Product, quantity: number = 1) => {
+    // Asegurarse de que quantity sea un número válido
+    const quantityToAdd = Math.max(1, Math.floor(quantity));
+    
+    // Verificar si ya hay una llamada pendiente para este producto
+    const pendingKey = product.id;
+    if (pendingAddsRef.current.has(pendingKey)) {
+      // Ya hay una llamada en proceso, ignorar esta
+      console.log('Bloqueado: llamada duplicada para', product.id);
+      return;
+    }
+    
+    // Marcar que hay una llamada pendiente INMEDIATAMENTE (síncrono)
+    pendingAddsRef.current.set(pendingKey, quantityToAdd);
+    console.log('Agregando:', product.title, 'Cantidad:', quantityToAdd);
+    
+    // Usar una función de actualización para asegurar que trabajamos con el estado más reciente
     setItems(prevItems => {
+      // Verificar nuevamente dentro de setItems (por si acaso)
+      if (pendingAddsRef.current.get(pendingKey) !== quantityToAdd) {
+        console.log('Bloqueado dentro de setItems');
+        return prevItems; // No hacer nada si ya se procesó
+      }
+      
       const existingItemIndex = prevItems.findIndex(item => item.product.id === product.id);
 
       if (existingItemIndex >= 0) {
-        // Update quantity if product already in cart
+        // Sum quantity if product already in cart
         const newItems = [...prevItems];
-        newItems[existingItemIndex].quantity += quantity;
+        const previousQuantity = newItems[existingItemIndex].quantity;
+        console.log('Cantidad anterior:', previousQuantity, 'Agregando:', quantityToAdd);
+        newItems[existingItemIndex].quantity = previousQuantity + quantityToAdd;
+        const totalQuantity = newItems[existingItemIndex].quantity;
+        console.log('Nueva cantidad total:', totalQuantity);
+        
+        // Limpiar el lock INMEDIATAMENTE después de calcular
+        pendingAddsRef.current.delete(pendingKey);
+        
+        // Mostrar toast después de actualizar el estado
+        setTimeout(() => {
+          showToast(`Agregaste ${quantityToAdd} ${quantityToAdd === 1 ? 'unidad' : 'unidades'} de ${product.title} al carrito (Total: ${totalQuantity} ${totalQuantity === 1 ? 'unidad' : 'unidades'})`);
+        }, 0);
+        
         return newItems;
       } else {
         // Add new item
-        return [...prevItems, { product, quantity }];
+        console.log('Producto nuevo, cantidad:', quantityToAdd);
+        
+        // Limpiar el lock INMEDIATAMENTE
+        pendingAddsRef.current.delete(pendingKey);
+        
+        // Mostrar toast después de actualizar el estado
+        setTimeout(() => {
+          showToast(`Agregaste ${quantityToAdd} ${quantityToAdd === 1 ? 'unidad' : 'unidades'} de ${product.title} al carrito`);
+        }, 0);
+        
+        return [...prevItems, { product, quantity: quantityToAdd }];
       }
     });
-
-    // Open the cart when adding an item
-    setIsCartOpen(true);
   };
 
   // Update quantity of a cart item
@@ -112,6 +166,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     clearCart,
     isCartOpen,
     setIsCartOpen,
+    toastMessage,
+    showToast,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

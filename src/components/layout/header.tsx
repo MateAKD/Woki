@@ -50,14 +50,12 @@ export default function Header() {
       {/* Main header */}
       <div className="container mx-auto py-2 sm:py-3 md:py-4 flex items-center justify-between">
         {/* Mobile menu trigger */}
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden text-white"
+        <button
+          className="md:hidden text-white p-3 hover:bg-white/10 rounded-md transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
-          <Menu className="h-6 w-6" />
-        </Button>
+          <Menu className="h-10 w-10" />
+        </button>
 
         {/* Logo (centered on mobile, left on desktop) */}
         <div className="absolute left-1/2 transform -translate-x-1/2 md:static md:transform-none md:left-0">
@@ -128,19 +126,17 @@ export default function Header() {
 
           {/* Cart */}
           <div className="relative">
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-white"
+            <button
+              className="text-white p-3 hover:bg-white/10 rounded-md transition-colors relative"
               onClick={() => setIsCartOpen(true)}
             >
-              <ShoppingBasket className="h-6 w-6" />
+              <ShoppingBasket className="h-10 w-10 md:h-12 md:w-12" />
               {totalItems > 0 && (
                 <div className="absolute -top-1 -right-1 bg-[#1a513c] text-[#f9f6f1] text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                   {totalItems}
                 </div>
               )}
-            </Button>
+            </button>
             <CartDrawer />
           </div>
         </div>

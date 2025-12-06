@@ -38,7 +38,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                 >
                   <Image
-                    src="/whatsapp-icon.png"
+                    src="/Whatsapp negro.png"
                     alt="WhatsApp"
                     width={20}
                     height={20}

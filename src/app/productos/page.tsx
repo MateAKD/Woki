@@ -24,7 +24,7 @@ export default function ProductsPage() {
       <div className="bg-[#1a513c] pt-6 pb-2">
         <div className="container mx-auto">
           <div className="text-sm text-gray-400">
-            <Link href="/" className="hover:text-primary">
+            <Link href="/" className="hover:text-white transition-colors">
               Inicio
             </Link>{" "}
             | Productos
