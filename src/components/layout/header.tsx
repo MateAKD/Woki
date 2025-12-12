@@ -19,8 +19,8 @@ export default function Header() {
   const router = useRouter();
   const { totalItems, setIsCartOpen } = useCart();
 
-  const filteredProducts = useMemo(() => 
-    search.length > 0 
+  const filteredProducts = useMemo(() =>
+    search.length > 0
       ? products.filter(p => p.title.toLowerCase().includes(search.toLowerCase()))
       : [],
     [search]
@@ -39,7 +39,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="bg-[#1a513c] text-white sticky top-0 z-50">
+    <header className="bg-[#1a513c] text-white sticky top-0 z-50 border-b border-black">
       {/* Top promotion banner - MOVED TO PAGE.TSX */}
       {/* <div className="bg-yellow-400 py-2 px-4 text-black text-center overflow-hidden whitespace-nowrap">
         <div className="animate-marquee-infinite">
@@ -144,9 +144,8 @@ export default function Header() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden bg-[#1a513c] fixed inset-0 z-50 transition-transform transform ${
-          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`md:hidden bg-[#1a513c] fixed inset-0 z-50 transition-transform transform ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
       >
         <div className="flex justify-between items-center p-4 border-b border-gray-800">
           <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
