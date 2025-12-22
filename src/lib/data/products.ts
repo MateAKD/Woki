@@ -13,7 +13,7 @@ export const products: Product[] = [
   {
     id: "1",
     title: "Truchón con salsa agridulce",
-    price: 12000,
+    price: 14000,
     imageUrl: "/Truchon/DSC09398.jpg",
     slug: "truchon-salsa-agridulce",
     featured: true,
@@ -33,7 +33,7 @@ export const products: Product[] = [
   {
     id: "3",
     title: "Carne al horno",
-    price: 10000,
+    price: 12000,
     imageUrl: "/Carne al horno con papas/DSC09277.jpg",
     slug: "carne-al-horno",
     featured: true,
