@@ -44,7 +44,7 @@ export const categories: Category[] = [
   {
     id: "4",
     title: "PESCADO CON VEGETALES Y ARROZ YAMANÍ",
-    imageUrl: "/viandas/pescado-con-vegetales.jpg",
+    imageUrl: "/viandas/pescado-con-vegetales-principal.jpg",
     slug: "pescado-con-vegetales-y-arroz-yamani",
     price: 16000
   },

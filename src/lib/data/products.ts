@@ -53,7 +53,7 @@ export const products: Product[] = [
     images: [
       "/viandas/box-keto-square.jpg",
       "/viandas/colita-de-cuadril.png",
-      "/viandas/pescado-con-vegetales.jpg",
+      "/viandas/pescado-con-vegetales-principal.jpg",
       "/viandas/berenjena.png",
       "/viandas/wok-pollo.png",
       "/viandas/wok-de-carne.png"
@@ -157,7 +157,7 @@ export const products: Product[] = [
     id: "4",
     title: "Pescado con vegetales y arroz yamaní",
     price: 16000,
-    imageUrl: "/viandas/pescado-con-vegetales.jpg",
+    imageUrl: "/viandas/pescado-con-vegetales-principal.jpg",
     slug: "pescado-con-vegetales-y-arroz-yamani",
     featured: true,
     description: "250 g de pescado blanco con 150 g de vegetales asados y 100 g de arroz yamaní.",
@@ -179,6 +179,7 @@ export const products: Product[] = [
       grasasTotales: 17
     },
     images: [
+      "/viandas/pescado-con-vegetales-principal.jpg",
       "/viandas/pescado-con-vegetales.jpg",
       "/Pescado con vegetales/DSC09501.jpg",
       "/Pescado con vegetales/DSC09502.jpg",
