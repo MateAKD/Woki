@@ -11,11 +11,13 @@ import { useState } from "react";
 interface ProductCardProps {
   title: string;
   price: number;
+  originalPrice?: number;
+  discountBadge?: string;
   imageUrl: string;
   slug: string;
 }
 
-export default function ProductCard({ title, price, imageUrl, slug }: ProductCardProps) {
+export default function ProductCard({ title, price, originalPrice, discountBadge, imageUrl, slug }: ProductCardProps) {
   const { addItem } = useCart();
   const [quantity, setQuantity] = useState(1);
 
@@ -47,20 +49,33 @@ export default function ProductCard({ title, price, imageUrl, slug }: ProductCar
   // Remove currency symbol for styling separately
   const priceWithoutSymbol = formattedPrice.replace('$', '');
 
+  const formattedOriginalPrice = originalPrice
+    ? new Intl.NumberFormat('es-AR', {
+        style: 'currency',
+        currency: 'ARS',
+        minimumFractionDigits: 2
+      }).format(originalPrice)
+    : null;
+
   return (
     <div className="group relative overflow-hidden bg-[#1a513c] text-white border-2 border-black shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.4)] transition-all duration-300 hover:-translate-y-1 rounded-sm flex flex-col h-full">
       {/* Product image */}
-      <div className="relative h-64 w-full bg-primary/20 overflow-hidden shrink-0">
-        <Link href={`/productos/${slug}`} className="block h-full">
+      <div className="relative h-64 w-full bg-[#133d2c] overflow-hidden shrink-0">
+        <Link href={`/productos/${slug}`} className="block h-full w-full">
           <Image
             src={imageUrl}
             alt={title}
             fill
             loading="lazy"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-110"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </Link>
+        {discountBadge && (
+          <div className="absolute top-2 left-2 z-10 bg-[#10e35b] text-black font-extrabold text-xs px-2 py-0.5 rounded-sm border border-black shadow-[2px_2px_0_0_rgba(0,0,0,1)] uppercase">
+            {discountBadge}
+          </div>
+        )}
       </div>
 
       {/* Product info */}
@@ -74,6 +89,11 @@ export default function ProductCard({ title, price, imageUrl, slug }: ProductCar
         <div className="mt-auto flex items-center justify-between pt-2">
           {/* Price - Left */}
           <div className="flex flex-col">
+            {formattedOriginalPrice && (
+              <span className="text-xs text-gray-500 line-through font-semibold mb-0.5">
+                {formattedOriginalPrice}
+              </span>
+            )}
             <span className="text-xl font-bold text-black leading-none">
               <span className="text-sm font-normal mr-0.5">$</span>{priceWithoutSymbol}
             </span>

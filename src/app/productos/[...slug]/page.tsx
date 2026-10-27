@@ -206,30 +206,29 @@ export default function ProductPage({ params }: ProductPageProps) {
                 )}
               </div>
               
-              {/* Miniaturas - Mobile: abajo */}
+              {/* Miniaturas - Mobile: abajo con desplazamiento horizontal fluido */}
               {images.length > 1 && (
-                <div className="flex md:hidden gap-0.5 order-3 overflow-x-auto pt-0 pb-2 scrollbar-hide">
+                <div className="flex md:hidden gap-2 order-3 overflow-x-auto py-3 px-1 scrollbar-hide touch-pan-x -mx-2">
                   {images.map((image, index) => (
-                    <div key={index} className="p-0.5 flex-shrink-0">
-                      <button
-                        onClick={() => setSelectedImageIndex(index)}
-                        className={`relative w-20 h-20 rounded-md overflow-visible border-2 transition-all ${
-                          selectedImageIndex === index 
-                            ? 'border-white shadow-lg scale-105' 
-                            : 'border-gray-700 opacity-70 hover:opacity-100'
-                        }`}
-                      >
-                        <div className="absolute inset-0 rounded-md overflow-hidden">
-                          <Image
-                            src={image}
-                            alt={`${product.title} - Miniatura ${index + 1}`}
-                            fill
-                            className="object-cover"
-                            unoptimized
-                          />
-                        </div>
-                      </button>
-                    </div>
+                    <button
+                      key={index}
+                      type="button"
+                      onClick={() => setSelectedImageIndex(index)}
+                      className={`relative flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-md overflow-hidden border-2 transition-all duration-200 active:scale-95 ${
+                        selectedImageIndex === index 
+                          ? 'border-[#10e35b] ring-2 ring-[#10e35b]/50 shadow-md scale-105' 
+                          : 'border-white/20 opacity-70 hover:opacity-100'
+                      }`}
+                      aria-label={`Ver imagen ${index + 1}`}
+                    >
+                      <Image
+                        src={image}
+                        alt={`${product.title} - Miniatura ${index + 1}`}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                    </button>
                   ))}
                 </div>
               )}
@@ -239,12 +238,73 @@ export default function ProductPage({ params }: ProductPageProps) {
             <div className="flex flex-col justify-between px-2 md:px-4">
               <div>
                 <h1 className="text-3xl font-bold mb-4">{product.title}</h1>
-                <p className="text-3xl font-bold mb-6">{formattedPrice}</p>
+                <div className="flex items-center gap-3 mb-6 flex-wrap">
+                  <p className="text-3xl font-bold text-white">{new Intl.NumberFormat('es-AR', {
+                    style: 'currency',
+                    currency: 'ARS',
+                    minimumFractionDigits: 2
+                  }).format(product.price)}</p>
+                  {product.originalPrice && (
+                    <p className="text-xl text-gray-400 line-through font-semibold">
+                      {new Intl.NumberFormat('es-AR', {
+                        style: 'currency',
+                        currency: 'ARS',
+                        minimumFractionDigits: 2
+                      }).format(product.originalPrice)}
+                    </p>
+                  )}
+                  {product.discountBadge && (
+                    <span className="bg-[#10e35b] text-black font-extrabold text-xs px-2.5 py-1 rounded-sm uppercase tracking-wide">
+                      {product.discountBadge}
+                    </span>
+                  )}
+                </div>
 
-                <div className="mb-8">
-                  <p className="text-gray-300 leading-relaxed">
-                    {product.description || "Descripción del producto... La descripción detallada del producto iría aquí, incluyendo información sobre ingredientes, preparación y más."}
+                <div className="mb-6 space-y-4">
+                  <p className="text-gray-200 leading-relaxed text-base">
+                    {product.description}
                   </p>
+
+                  {product.ingredients && product.ingredients.length > 0 && (
+                    <div className="pt-2 border-t border-gray-800">
+                      <h3 className="text-sm font-semibold tracking-wide uppercase text-[#10e35b] mb-2">
+                        Ingredientes
+                      </h3>
+                      <p className="text-sm text-gray-300 leading-relaxed">
+                        {product.ingredients.join(" · ")}
+                      </p>
+                    </div>
+                  )}
+
+                  {product.nutritionalInfo && (
+                    <div className="pt-2 border-t border-gray-800">
+                      <h3 className="text-sm font-semibold tracking-wide uppercase text-[#10e35b] mb-2">
+                        Información nutricional
+                      </h3>
+                      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        <div className="bg-white/5 border border-white/10 rounded-lg p-2.5 text-center">
+                          <span className="block text-xs text-gray-400">Calorías</span>
+                          <span className="text-base font-bold text-white">{product.nutritionalInfo.kcal}</span>
+                          <span className="text-[10px] text-gray-400 block">kcal</span>
+                        </div>
+                        <div className="bg-white/5 border border-white/10 rounded-lg p-2.5 text-center">
+                          <span className="block text-xs text-gray-400">Proteínas</span>
+                          <span className="text-base font-bold text-white">{product.nutritionalInfo.proteinas}</span>
+                          <span className="text-[10px] text-gray-400 block">g</span>
+                        </div>
+                        <div className="bg-white/5 border border-white/10 rounded-lg p-2.5 text-center">
+                          <span className="block text-xs text-gray-400">Carbohidratos</span>
+                          <span className="text-base font-bold text-white">{product.nutritionalInfo.carbohidratos}</span>
+                          <span className="text-[10px] text-gray-400 block">g</span>
+                        </div>
+                        <div className="bg-white/5 border border-white/10 rounded-lg p-2.5 text-center">
+                          <span className="block text-xs text-gray-400">Grasas totales</span>
+                          <span className="text-base font-bold text-white">{product.nutritionalInfo.grasasTotales}</span>
+                          <span className="text-[10px] text-gray-400 block">g</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
 

@@ -6,15 +6,16 @@ import { categories } from "@/lib/data/categories";
 import { Dot } from 'lucide-react';
 
 export default function Home() {
-  // Mostrar solo estos productos en el inicio
+  // Oferta destacada Box Keto arriba + Carne con papas en oferta 1ro abajo + los otros 2 platos
   const featuredSlugs = [
-    "truchon-salsa-agridulce",
-    "bondiola-a-la-mostaza",
-    "carne-al-horno",
-    "tortilla-de-papa",
-    "wrap-de-pollo-bbq"
+    "box-keto",
+    "carne-con-papas-y-demi-glace",
+    "truchon-con-pure-de-zanahoria",
+    "bondiola-a-la-mostaza-con-pure-de-batata"
   ];
-  const homeCategories = categories.filter(cat => featuredSlugs.includes(cat.slug));
+  const homeCategories = featuredSlugs
+    .map(slug => categories.find(cat => cat.slug === slug))
+    .filter((cat): cat is typeof categories[0] => Boolean(cat));
 
   return (
     <PageLayout>

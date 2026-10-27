@@ -6,6 +6,8 @@ interface Product {
   id: string;
   title: string;
   price: number;
+  originalPrice?: number;
+  discountBadge?: string;
   imageUrl: string;
   slug: string;
 }
@@ -27,6 +29,8 @@ export default function ProductGrid({ products, title }: ProductGridProps) {
             key={product.id}
             title={product.title}
             price={product.price}
+            originalPrice={product.originalPrice}
+            discountBadge={product.discountBadge}
             imageUrl={product.imageUrl}
             slug={product.slug}
           />

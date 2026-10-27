@@ -3,97 +3,121 @@ export interface Category {
   title: string;
   imageUrl: string;
   slug: string;
+  price?: number;
+  originalPrice?: number;
+  discountBadge?: string;
+  isSpecialOffer?: boolean;
 }
 
 export const categories: Category[] = [
   {
+    id: "box-keto",
+    title: "BOX KETO - 5 PLATOS",
+    imageUrl: "/viandas/box-keto-square.jpg",
+    slug: "box-keto",
+    price: 67000,
+    originalPrice: 74000,
+    discountBadge: "10% OFF",
+    isSpecialOffer: true
+  },
+  {
     id: "1",
-    title: "TRUCHÓN CON SALSA AGRIDULCE",
-    imageUrl: "/Truchon/DSC09398.jpg",
-    slug: "truchon-salsa-agridulce"
+    title: "TRUCHÓN CON PURÉ DE ZANAHORIA",
+    imageUrl: "/viandas/truchon.png",
+    slug: "truchon-con-pure-de-zanahoria",
+    price: 19500
   },
   {
     id: "2",
-    title: "PESCADO CON VEGETALES",
-    imageUrl: "/Pescado con vegetales/DSC09501.jpg",
-    slug: "pescado-con-vegetales"
+    title: "COLITA DE CUADRIL CON VERDURAS ASADAS",
+    imageUrl: "/viandas/colita-de-cuadril.png",
+    slug: "colita-de-cuadril-con-verduras-asadas",
+    price: 18000
   },
   {
     id: "3",
-    title: "CARNE AL HORNO",
-    imageUrl: "/Carne al horno con papas/DSC09277.jpg",
-    slug: "carne-al-horno"
+    title: "WOK DE CARNE",
+    imageUrl: "/viandas/wok-de-carne.png",
+    slug: "wok-de-carne",
+    price: 16500
   },
   {
     id: "4",
-    title: "BONDIOLA A LA MOSTAZA",
-    imageUrl: "/Bondiola a la mostaza/DSC09340.jpg",
-    slug: "bondiola-a-la-mostaza"
+    title: "PESCADO CON VEGETALES Y ARROZ YAMANÍ",
+    imageUrl: "/viandas/pescado-con-vegetales.jpg",
+    slug: "pescado-con-vegetales-y-arroz-yamani",
+    price: 16000
   },
   {
     id: "5",
-    title: "ALBÓNDIGAS DE POLLO",
-    imageUrl: "/Albondigas de pollo/DSC09326.jpg",
-    slug: "albondigas-de-pollo"
+    title: "WOK DE POLLO",
+    imageUrl: "/viandas/wok-pollo.png",
+    slug: "wok-de-pollo",
+    price: 14500
   },
   {
     id: "6",
-    title: "GNOCCHIS",
-    imageUrl: "/Gnocchis/DSC09260.jpg",
-    slug: "gnocchis"
+    title: "ALBÓNDIGAS DE POLLO CON COUS COUS",
+    imageUrl: "/viandas/albondigas-con-cous-cous.png",
+    slug: "albondigas-de-pollo-con-cous-cous-y-vegetales",
+    price: 14000
   },
   {
     id: "7",
-    title: "ARROZ CON POLLO SPICY",
-    imageUrl: "/Arroz con pollo spicy/DSC09496.jpg",
-    slug: "arroz-con-pollo-spicy"
+    title: "BONDIOLA A LA MOSTAZA",
+    imageUrl: "/viandas/bondiola-con-pure-de-batata.png",
+    slug: "bondiola-a-la-mostaza-con-pure-de-batata",
+    price: 14000
   },
   {
     id: "8",
-    title: "WOK DE CARNE",
-    imageUrl: "/Wok de carne/DSC09482.jpg",
-    slug: "wok-de-carne"
+    title: "CARNE CON PAPAS Y DEMI GLACE",
+    imageUrl: "/viandas/carne-con-papas.jpg",
+    slug: "carne-con-papas-y-demi-glace",
+    price: 13000,
+    originalPrice: 18000,
+    discountBadge: "28% OFF"
   },
   {
     id: "9",
-    title: "MILANESA CON PURÉ",
-    imageUrl: "/Milanesa con pure/DSC09353.jpg",
-    slug: "milanesa-con-pure"
+    title: "TORTILLA DE ESPINACA",
+    imageUrl: "/viandas/tortilla-de-espinaca.png",
+    slug: "tortilla-de-espinaca",
+    price: 13000
   },
   {
     id: "10",
-    title: "RISSOTO DE HONGOS",
-    imageUrl: "/Rissoto de hongos/DSC09382.jpg",
-    slug: "rissoto-de-hongos"
+    title: "PASTEL DE PAPA",
+    imageUrl: "/viandas/pastel-de-papa.png",
+    slug: "pastel-de-papa",
+    price: 12000
   },
   {
     id: "11",
-    title: "PASTEL DE PAPA",
-    imageUrl: "/Pastel de papa/DSC09484.jpg",
-    slug: "pastel-de-papa"
+    title: "WRAP DE POLLO BBQ",
+    imageUrl: "/viandas/wrap-de-pollo-bbq.png",
+    slug: "wrap-de-pollo-bbq",
+    price: 12000
   },
   {
     id: "12",
-    title: "BERENJENAS A LA PARMESANA",
-    imageUrl: "/placeholder.jpg",
-    slug: "berenjenas-a-la-parmesana"
+    title: "BERENJENA A LA PARMESANA",
+    imageUrl: "/viandas/berenjena.png",
+    slug: "berenjena-a-la-parmesana",
+    price: 9800
   },
   {
     id: "13",
     title: "TORTILLA DE PAPA",
-    imageUrl: "/Tortilla de papa/DSC09214.jpg",
-    slug: "tortilla-de-papa"
+    imageUrl: "/viandas/tortilla-de-papa.png",
+    slug: "tortilla-de-papa",
+    price: 9500
   },
   {
     id: "14",
-    title: "TORTILLA DE ESPINACA",
-    imageUrl: "/Tortilla de espinaca/DSC09180.jpg",
-    slug: "tortilla-de-espinaca"
-  },
-  {
-    id: "15",
-    title: "WRAP DE POLLO BBQ",
-    imageUrl: "/Wrap de pollo bbq/DSC09407.jpg",
-    slug: "wrap-de-pollo-bbq"
+    title: "RISOTTO DE HONGOS",
+    imageUrl: "/viandas/risotto-de-hongos.png",
+    slug: "risotto-de-hongos",
+    price: 9500
   }
 ];

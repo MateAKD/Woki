@@ -35,6 +35,11 @@ export default function CartDrawer() {
   const [paymentMethod, setPaymentMethod] = useState<'transferencia' | 'efectivo' | ''>('');
   
   const CANTIDAD_MINIMA_ENVIO = 5;
+  // Cada Box Keto equivale a 5 viandas para cumplir la compra mínima
+  const totalViandas = items.reduce((sum, item) => {
+    const factor = item.product.slug === 'box-keto' || item.product.id === 'box-keto' ? 5 : 1;
+    return sum + (item.quantity * factor);
+  }, 0);
   const totalConEnvio = totalPrice;
   
   const formattedTotalPrice = new Intl.NumberFormat('es-AR', {
@@ -99,9 +104,9 @@ export default function CartDrawer() {
         return;
       }
       
-      // Validar cantidad mínima
-      if (totalItems < CANTIDAD_MINIMA_ENVIO) {
-        setErrorMessage(`La cantidad mínima de compra es de ${CANTIDAD_MINIMA_ENVIO} productos`);
+      // Validar cantidad mínima (teniendo en cuenta que cada Box Keto suma 5 viandas)
+      if (totalViandas < CANTIDAD_MINIMA_ENVIO) {
+        setErrorMessage(`La cantidad mínima de compra es de ${CANTIDAD_MINIMA_ENVIO} viandas (Actualmente tenés ${totalViandas})`);
         setShowErrorDialog(true);
         return;
       }
@@ -414,10 +419,10 @@ export default function CartDrawer() {
                 </Button>
 
                 {/* Mensaje de mínimo de compra */}
-                {totalItems < CANTIDAD_MINIMA_ENVIO && (
-                  <div className="mt-4 text-center text-yellow-400 font-semibold flex items-center justify-center gap-2">
-                    <AlertCircle className="h-4 w-4" />
-                    La cantidad mínima de compra es de {CANTIDAD_MINIMA_ENVIO} productos
+                {totalViandas < CANTIDAD_MINIMA_ENVIO && (
+                  <div className="mt-4 text-center text-yellow-400 font-semibold flex items-center justify-center gap-2 text-xs sm:text-sm">
+                    <AlertCircle className="h-4 w-4 shrink-0" />
+                    <span>La cantidad mínima de compra es de {CANTIDAD_MINIMA_ENVIO} viandas ({totalViandas}/{CANTIDAD_MINIMA_ENVIO})</span>
                   </div>
                 )}
               </div>

@@ -41,3 +41,8 @@ yarn-error.log*
 next-env.d.ts
 
 .vercel
+
+# media uploads
+public/*.zip
+public/FOTOS VIANDAS*
+
